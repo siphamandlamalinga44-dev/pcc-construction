@@ -295,3 +295,11 @@ a { text-decoration: none; color: inherit; }
 @media (max-width: 900px) {
   .grid-2 { grid-template-columns: 1fr; }
 }
+
+/* ============ Home welcome video ============ */
+.welcome-video-section { padding-top: 32px; }
+.welcome-video { max-width: 860px; margin: 24px auto 0; }
+
+@media (max-width: 900px) {
+  .welcome-video { max-width: 100%; }
+}
