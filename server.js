@@ -11,7 +11,6 @@ const DATA_DIR = path.join(__dirname, 'data');
 const CONTENT_FILE = path.join(DATA_DIR, 'content.json');
 const MESSAGES_FILE = path.join(DATA_DIR, 'messages.json');
 const ADMIN_FILE = path.join(DATA_DIR, 'admin.json');
-const DEFAULT_ADMIN_PASSWORD = 'admin123';
 const SESSION_TTL_MS = 1000 * 60 * 60 * 8; // 8 hours
 
 // ---------------------------------------------------------------- data layer
@@ -189,8 +188,10 @@ let messages = loadJSON(MESSAGES_FILE, []);
 let admin = loadJSON(ADMIN_FILE, null);
 if (!admin) {
   const salt = crypto.randomBytes(16).toString('hex');
-  admin = { salt, hash: hashPassword(DEFAULT_ADMIN_PASSWORD, salt) };
+  const generated = crypto.randomBytes(12).toString('base64url');
+  admin = { salt, hash: hashPassword(generated, salt) };
   saveJSON(ADMIN_FILE, admin);
+  console.log('[admin] Admin account created. Password: ' + generated);
 }
 
 // ------------------------------------------------------------- email notifications

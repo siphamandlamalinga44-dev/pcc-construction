@@ -32,10 +32,55 @@ deployment options.
 3. **Back up your data** — all editable content lives in `data/`
    (`content.json`, `messages.json`, `admin.json`). Back it up regularly.
 
-4. **Use HTTPS** — put the app behind a TLS-terminating reverse proxy (most
-   hosts do this automatically).
+4. **Use HTTPS** — Railway and Render provide this automatically.
 
 ---
+
+## Option 2: Railway (simplest)
+
+The project already includes `railway.toml`, so the build, start command and
+health check are configured automatically.
+
+### Method A — deploy with the CLI (recommended)
+
+1. Install the Railway CLI:
+   ```bash
+   npm i -g @railway/cli
+   ```
+2. In the project folder, run:
+   ```bash
+   railway up
+   ```
+   Railway signs you in via your browser, creates the project and service,
+   and deploys. You get an instant `*.up.railway.app` HTTPS URL.
+3. Add SMTP variables (optional):
+   ```bash
+   railway variables set SMTP_HOST=smtp.example.com
+   railway variables set SMTP_PORT=587
+   railway variables set SMTP_USER=you@example.com
+   railway variables set SMTP_PASS=your-app-password
+   railway variables set MAIL_TO=you@example.com
+   ```
+
+### Method B — fully non-interactive (token)
+
+For headless/agent deployments, generate an account token in Railway →
+**Account Settings → Tokens** and use it as an environment variable:
+
+```bash
+RAILWAY_API_TOKEN=your-token railway up -y
+```
+
+You can revoke the token in the same Tokens page after deployment.
+
+### After deploying on Railway
+
+- Railway sets the `PORT` environment variable automatically — the app
+  listens on it, no config needed.
+- ⚠️ **Data persistence:** Railway's filesystem is ephemeral — your `data/`
+  edits are lost on restarts/redeploys. For production, attach a **Volume**
+  (Railway → Service → Storage) mounted at `/app/data`, or re-enter content
+  after redeploys.
 
 ## Option 1: Render (free tier available)
 
@@ -51,17 +96,6 @@ deployment options.
    lost if the instance restarts. Add a **persistent disk** (type: standard,
    mount at `/app/data` — or wherever the repo's `data/` directory is) or
    re-enter content after restarts.
-
-## Option 2: Railway (simplest)
-
-1. Create an account at [railway.com](https://railway.com) and link your repo
-   (or use the CLI: `railway init && railway up`).
-2. Railway auto-detects Node and deploys — no build/start commands needed
-   (it uses the `start` script from `package.json`).
-3. Add SMTP variables under **Variables**.
-4. You get an instant `*.up.railway.app` HTTPS URL.
-5. ⚠️ Railway is also ephemeral — keep `data/` backed up or mirror it to a
-   volume/object store.
 
 ## Option 3: Vultr / any VPS (full control, cheapest long-term)
 
@@ -90,8 +124,6 @@ deployment options.
    ```bash
    cp -r /var/www/construction-site/data /var/www/backups/data-$(date +%F)
    ```
-
----
 
 ## After deployment
 

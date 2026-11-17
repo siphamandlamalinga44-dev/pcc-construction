@@ -1,4 +1,4 @@
-# Granite Peak Construction — Fullstack Website
+# PCC – Philip Chauke Construction — Fullstack Website
 
 A fullstack website for a construction company, built with **Node.js + Express + EJS**.
 It comes with a built-in **admin CMS** so you can change anything on the site without

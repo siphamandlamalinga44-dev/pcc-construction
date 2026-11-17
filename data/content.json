@@ -1,128 +1,152 @@
 {
   "site": {
-    "companyName": "Granite Peak Construction",
-    "tagline": "Building Strength, Delivering Excellence",
-    "phone": "+27 11 555 0198",
-    "email": "hello@granitepeak.co.za",
-    "address": "12 Foundry Road, Germiston, Gauteng, 2040",
+    "companyName": "PCC – Philip Chauke Construction",
+    "tagline": "Building Your Vision, Built to Last",
+    "phone": "+27 11 000 0000",
+    "email": "info@pccconstruction.co.za",
+    "address": "Gauteng, South Africa",
     "established": "2009"
   },
   "hero": {
-    "title": "Building South Africa's Future, One Foundation at a Time",
-    "subtitle": "From civil works to complete turnkey construction.",
+    "title": "Building Your Vision, One Foundation at a Time",
+    "subtitle": "From renovations and plastering to roofing, electrical, plumbing and more — PCC delivers quality, reliable construction services across Gauteng.",
     "ctaText": "Get a Free Quote"
   },
   "home": {
-    "aboutPreview": "For over 15 years, Granite Peak Construction has delivered complex building and civil projects with uncompromising quality and service.",
+    "aboutPreview": "PCC – Philip Chauke Construction is a trusted building and renovation contractor, delivering quality workmanship across Gauteng — from small repairs to complete new builds.",
     "stats": [
       {
-        "value": "",
-        "label": ""
+        "value": "15+",
+        "label": "Years in Business"
       },
       {
-        "value": "",
-        "label": ""
+        "value": "320+",
+        "label": "Projects Delivered"
       },
       {
-        "value": "",
-        "label": ""
+        "value": "98%",
+        "label": "Client Satisfaction"
       },
       {
-        "value": "",
-        "label": ""
+        "value": "40+",
+        "label": "Expert Crew"
       }
     ],
     "whyChooseUs": [
       {
-        "title": "",
-        "text": ""
+        "title": "On-Time Delivery",
+        "text": "Tight scheduling and solid project management keep every build on track, every time."
       },
       {
-        "title": "",
-        "text": ""
+        "title": "Quality First",
+        "text": "We use premium materials and strict workmanship standards, so results last for decades."
       },
       {
-        "title": "",
-        "text": ""
+        "title": "Transparent Pricing",
+        "text": "Clear quotes with no hidden costs — you always know exactly where your money goes."
       }
     ]
   },
   "about": {
     "body": [
-      "Granite Peak Construction was founded in 2009 with a single belief: that every structure should be built to outlast trends, weather, and time. What started as a small crew of three has grown into a full-service construction partner working across Gauteng.",
-      "We handle the full lifecycle of a project — planning, earthworks, civil works, structural building, finishes, and handover — which means one accountable team from foundation to final inspection.",
-      "Our work spans commercial office blocks, industrial warehouses, residential developments, and municipal infrastructure. No matter the scale, we apply the same disciplined standards to every site."
+      "PCC – Philip Chauke Construction is a building and renovation contractor serving clients across Gauteng. From new builds to renovations and repairs, we deliver quality workmanship on every project, big or small.",
+      "We take on the full scope of a build — planning, structural work, finishes, and handover — so you have one accountable team from start to finish.",
+      "With a focus on honest pricing, reliable timelines and work that lasts, we deliver results our clients can trust."
     ]
   },
   "services": [
     {
-      "id": "2a2c0b9b-eeb1-486c-a3f7-0a3e6ca97521",
-      "icon": "🏗️",
-      "title": "Civil & Infrastructure Works",
-      "description": "Roads, drainage, earthworks and site preparation — the solid ground every project stands on."
-    },
-    {
-      "id": "fc36461f-198e-4814-8260-0c8bb1529b7e",
-      "icon": "🏢",
-      "title": "Commercial Construction",
-      "description": "Office blocks, retail spaces and mixed-use developments built to spec and on schedule."
-    },
-    {
-      "id": "7dfa9d92-669b-4a34-bad9-42d461a9e9ed",
-      "icon": "🏠",
-      "title": "Residential Building",
-      "description": "From individual homes to multi-unit housing estates with turnkey finishing and handover."
-    },
-    {
-      "id": "16f55a8b-cf57-4ef8-965c-8914f7fd5891",
-      "icon": "🏭",
-      "title": "Industrial & Warehouses",
-      "description": "Heavy-duty structures, warehouses and factory builds engineered for heavy use."
-    },
-    {
-      "id": "050ca102-1276-443c-91fc-90d1a5c56d20",
+      "id": "33c60f06-e0bc-4cf3-8a1a-d08f227dcd5f",
       "icon": "🛠️",
-      "title": "Renovations & Alterations",
-      "description": "Retrofits, extensions and modernisations that give existing buildings a new lease on life."
+      "title": "Renovations",
+      "description": "Full-home and section renovations: updates, extensions and modernisations that bring your space back to life."
     },
     {
-      "id": "dcb3e609-7978-42d8-92af-a95883211708",
+      "id": "d47b1678-a9bd-4a56-96f5-83bb8ac1b967",
+      "icon": "🧱",
+      "title": "Plastering",
+      "description": "Internal and external plastering and wall finishing for surfaces that are smooth, level and durable."
+    },
+    {
+      "id": "89fea460-9ee8-4381-9115-428b288436e5",
       "icon": "📋",
-      "title": "Project Management",
-      "description": "End-to-end planning, budgeting and site supervision with transparent reporting."
+      "title": "Fisca Boards",
+      "description": "Installation and fitting of Fisca (fibre-cement) boards for walls, ceilings and roofing."
+    },
+    {
+      "id": "a7fe9dcc-81f0-4ca0-8d6e-8fd7c3e94f63",
+      "icon": "⚡",
+      "title": "Electrical",
+      "description": "Complete electrical installations, repairs and maintenance for homes and businesses."
+    },
+    {
+      "id": "40a45208-324a-49f3-b214-7e3ae6822ff6",
+      "icon": "🚰",
+      "title": "Plumbing",
+      "description": "Plumbing installations, repairs and maintenance — from leaks and taps to full bathroom plumbing."
+    },
+    {
+      "id": "3405d318-1ffe-40c2-aefb-39572be3e4a4",
+      "icon": "🔌",
+      "title": "House Wiring",
+      "description": "Professional house wiring and rewiring for new builds, renovations and older properties."
+    },
+    {
+      "id": "b9ccc7f9-e7cd-4327-92a5-dea1a7ad56ef",
+      "icon": "📐",
+      "title": "House Plans",
+      "description": "Drafting and design of house plans, extensions and alteration drawings for your project."
+    },
+    {
+      "id": "8f7b96d4-0b6d-4aa4-8919-2a173f357d7c",
+      "icon": "🏠",
+      "title": "Roofing",
+      "description": "Roof installation, repairs and replacements that keep your home safe and weatherproof."
+    },
+    {
+      "id": "0bb8c086-b240-4f3e-9526-b1381553a03d",
+      "icon": "🏗️",
+      "title": "Ceiling",
+      "description": "Ceiling installation and repair, including drywall, fibre-cement and suspended ceilings."
+    },
+    {
+      "id": "f74c44e6-6b3e-499f-8ff6-d8a15fdbb574",
+      "icon": "🛁",
+      "title": "Tile Fitting",
+      "description": "Tile installation and fitting for floors, walls and bathrooms with clean, lasting finishes."
     }
   ],
   "projects": [
     {
       "id": "31834a1a-e851-4f23-886f-b088e198d46f",
-      "title": "Randburg Corporate Office Block",
+      "title": "Commercial Office Renovation",
       "category": "Commercial",
       "date": "2024",
-      "description": "A five-storey office development delivered on schedule with energy-efficient glazing and modern interiors.",
+      "description": "A full office renovation delivered on schedule with modern finishes and updated infrastructure.",
       "image": ""
     },
     {
       "id": "8def87a7-150c-426e-b56b-2a500ca87d4e",
-      "title": "East Rand Logistics Warehouse",
+      "title": "Industrial Warehouse Build",
       "category": "Industrial",
       "date": "2023",
-      "description": "A 12,000 m² distribution warehouse with heavy-duty flooring and automated loading bays.",
+      "description": "A large-scale warehouse build with heavy-duty flooring and loading areas.",
       "image": ""
     },
     {
       "id": "56caa563-df8e-4877-ae58-6a2e049bb783",
-      "title": "Midrand Residential Estate",
+      "title": "Residential House Construction",
       "category": "Residential",
       "date": "2023",
-      "description": "A 48-unit secure estate with finishes and landscaping completed to a high standard.",
+      "description": "A complete house build from foundation to handover, finished to a high standard.",
       "image": ""
     },
     {
       "id": "ec99e734-0065-4441-8df0-f00ce8be9da9",
-      "title": "City of Joburg Road Upgrade",
+      "title": "Infrastructure & Road Works",
       "category": "Infrastructure",
       "date": "2022",
-      "description": "Dual-lane road resurfacing and stormwater drainage for a major municipal corridor.",
+      "description": "Road resurfacing and stormwater drainage works for a major corridor.",
       "image": ""
     }
   ],
@@ -131,7 +155,7 @@
     "hours": "Office hours: Monday – Friday, 07:30 – 17:00"
   },
   "footer": {
-    "text": "Granite Peak Construction — trusted builders for commercial, residential, industrial and infrastructure projects.",
-    "copyright": "© 2026 Granite Peak Construction. All rights reserved."
+    "text": "PCC – Philip Chauke Construction — trusted building, renovation and maintenance services across Gauteng.",
+    "copyright": "© 2026 PCC – Philip Chauke Construction. All rights reserved."
   }
 }
