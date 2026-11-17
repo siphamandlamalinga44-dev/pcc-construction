@@ -1,0 +1,41 @@
+<%- include('partials/head', { title: title }) %>
+
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow eyebrow-light">About Us</span>
+    <h1>Building with integrity since <%= content.site.established %></h1>
+    <p><%= content.site.tagline %></p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container narrow">
+    <% content.about.body.forEach(function(para) { %>
+      <p class="lead"><%= para %></p>
+    <% }) %>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <span class="eyebrow">The strengths behind every build</span>
+    <h2 class="section-heading">Why clients choose us</h2>
+    <div class="grid-3">
+      <% content.home.whyChooseUs.forEach(function(w) { %>
+        <div class="card">
+          <h3><%= w.title %></h3>
+          <p><%= w.text %></p>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="container cta-inner">
+    <h2>Want to work with us?</h2>
+    <a class="btn btn-light btn-lg" href="/contact">Get a Free Quote</a>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

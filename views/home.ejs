@@ -1,0 +1,90 @@
+<%- include('partials/head', { title: title }) %>
+
+<section class="hero">
+  <div class="container hero-inner">
+    <span class="hero-eyebrow"><%= content.site.tagline %></span>
+    <h1><%= content.hero.title %></h1>
+    <p class="hero-subtitle"><%= content.hero.subtitle %></p>
+    <a class="btn btn-primary btn-lg" href="/contact"><%= content.hero.ctaText %></a>
+  </div>
+</section>
+
+<section class="stats-band">
+  <div class="container stats-grid">
+    <% content.home.stats.forEach(function(s) { %>
+      <div class="stat">
+        <div class="stat-value"><%= s.value %></div>
+        <div class="stat-label"><%= s.label %></div>
+      </div>
+    <% }) %>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container two-col">
+    <div>
+      <span class="eyebrow">About <%= content.site.companyName %></span>
+      <h2>A building partner you can build on</h2>
+      <p class="lead"><%= content.home.aboutPreview %></p>
+      <a class="btn btn-outline" href="/about">Read our story</a>
+    </div>
+    <div class="why-card">
+      <% content.home.whyChooseUs.forEach(function(w) { %>
+        <div class="why-item">
+          <h3><%= w.title %></h3>
+          <p><%= w.text %></p>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <span class="eyebrow">What we do</span>
+    <h2 class="section-heading">Our Services</h2>
+    <div class="grid-3">
+      <% content.services.slice(0, 3).forEach(function(s) { %>
+        <div class="card">
+          <div class="card-icon"><%= s.icon %></div>
+          <h3><%= s.title %></h3>
+          <p><%= s.description %></p>
+        </div>
+      <% }) %>
+    </div>
+    <p class="center mt"><a class="btn btn-primary" href="/services">View all services</a></p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <span class="eyebrow">Selected work</span>
+    <h2 class="section-heading">Recent Projects</h2>
+    <div class="grid-3">
+      <% content.projects.slice(0, 3).forEach(function(p) { %>
+        <a class="card project-card" href="/projects">
+          <div class="project-thumb">
+            <% if (p.image) { %>
+              <img src="<%= p.image %>" alt="<%= p.title %>">
+            <% } else { %>
+              <div class="thumb-placeholder"><span><%= p.category %></span></div>
+            <% } %>
+          </div>
+          <h3><%= p.title %></h3>
+          <p><%= p.description %></p>
+        </a>
+      <% }) %>
+    </div>
+    <p class="center mt"><a class="btn btn-outline" href="/projects">See all projects</a></p>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="container cta-inner">
+    <h2>Ready to start your build?</h2>
+    <p>Get a free, no-obligation quote from our team today.</p>
+    <a class="btn btn-light btn-lg" href="/contact"><%= content.hero.ctaText %></a>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= title %> · Admin · <%= content.site.companyName %></title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="admin-body">
+  <div class="admin-layout">
+    <aside class="admin-sidebar">
+      <div class="admin-brand">⬢ Admin CMS</div>
+      <nav>
+        <a href="/admin" class="<%= title === 'Admin Dashboard' ? 'active' : '' %>">Dashboard</a>
+        <a href="/admin/content" class="<%= title === 'Edit Website Text' ? 'active' : '' %>">Website Text</a>
+        <a href="/admin/services" class="<%= title === 'Manage Services' ? 'active' : '' %>">Services</a>
+        <a href="/admin/projects" class="<%= title === 'Manage Projects' ? 'active' : '' %>">Projects</a>
+        <a href="/admin/messages" class="<%= title === 'Contact Messages' ? 'active' : '' %>">Messages <% if (typeof counts !== 'undefined' && counts.messages) { %><span class="badge"><%= counts.messages %></span><% } %></a>
+        <a href="/admin/password" class="<%= title === 'Change Admin Password' ? 'active' : '' %>">Password</a>
+        <a href="/" target="_blank">View site ↗</a>
+        <form method="post" action="/admin/logout" style="margin-top:1rem">
+          <button type="submit" class="btn btn-outline btn-sm">Log out</button>
+        </form>
+      </nav>
+    </aside>
+    <div class="admin-main">
+      <% (flash || []).forEach(function(f) { %>
+        <div class="alert alert-<%= f.type %>"><%= f.msg %></div>
+      <% }) %>

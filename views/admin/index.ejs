@@ -1,0 +1,25 @@
+<%- include('_head', { title: title }) %>
+
+<h1>Dashboard</h1>
+<p class="muted">Everything you see on the website is stored here. Change any text, add or remove services and projects, and read messages sent through the contact form.</p>
+
+<div class="admin-cards">
+  <a class="admin-card" href="/admin/content">
+    <h3>Website Text</h3>
+    <p>Company details, hero, about page, stats and footer.</p>
+  </a>
+  <a class="admin-card" href="/admin/services">
+    <h3>Services (<%= counts.services %>)</h3>
+    <p>Add, edit or delete the services you offer.</p>
+  </a>
+  <a class="admin-card" href="/admin/projects">
+    <h3>Projects (<%= counts.projects %>)</h3>
+    <p>Manage your project portfolio with images.</p>
+  </a>
+  <a class="admin-card" href="/admin/messages">
+    <h3>Messages (<%= counts.messages %>)</h3>
+    <p>Read and manage enquiries from the contact form.</p>
+  </a>
+</div>
+
+<%- include('_foot') %>

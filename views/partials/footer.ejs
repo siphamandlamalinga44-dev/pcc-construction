@@ -1,0 +1,29 @@
+  </main>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <div class="brand brand-footer">
+          <span class="brand-mark">⬢</span>
+          <span class="brand-name"><%= content.site.companyName %></span>
+        </div>
+        <p class="footer-text"><%= content.footer.text %></p>
+      </div>
+      <div class="footer-contact">
+        <p><strong><%= content.site.phone %></strong></p>
+        <p><a href="mailto:<%= content.site.email %>"><%= content.site.email %></a></p>
+        <p><%= content.site.address %></p>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p><%= content.footer.copyright %></p>
+    </div>
+  </footer>
+  <script>
+    var toggle = document.getElementById('nav-toggle');
+    var nav = document.getElementById('main-nav');
+    if (toggle) toggle.addEventListener('click', function () {
+      nav.classList.toggle('open');
+    });
+  </script>
+</body>
+</html>

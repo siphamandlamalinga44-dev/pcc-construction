@@ -1,0 +1,33 @@
+<%- include('partials/head', { title: title }) %>
+
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow eyebrow-light">Services</span>
+    <h1>Full-service construction, under one roof</h1>
+    <p>From the first earthworks to final handover, we cover every stage of your project.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="grid-3">
+      <% content.services.forEach(function(s) { %>
+        <div class="card service-card">
+          <div class="card-icon"><%= s.icon %></div>
+          <h3><%= s.title %></h3>
+          <p><%= s.description %></p>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="container cta-inner">
+    <h2>Not sure which service fits your project?</h2>
+    <p>Tell us what you have in mind — we will point you in the right direction.</p>
+    <a class="btn btn-light btn-lg" href="/contact">Talk to us</a>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

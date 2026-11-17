@@ -1,0 +1,27 @@
+<%- include('_head', { title: title }) %>
+
+<h1>Contact Messages</h1>
+<p class="muted">Enquiries sent through the website's contact form.</p>
+
+<% if (!messages.length) { %>
+  <div class="admin-card"><p class="muted">No messages yet. When a visitor submits the contact form, their message will appear here.</p></div>
+<% } %>
+
+<% messages.forEach(function(m) { %>
+  <div class="admin-row msg-row">
+    <div class="admin-row-main">
+      <strong><%= m.name %></strong>
+      <span class="muted small">
+        <%= m.email %><% if (m.phone) { %> · <%= m.phone %><% } %>
+        · <%= new Date(m.date).toLocaleString() %>
+      </span>
+      <div class="msg-body"><%= m.message %></div>
+    </div>
+    <form method="post" action="/admin/messages/delete" style="display:inline" onsubmit="return confirm('Delete this message?')">
+      <input type="hidden" name="id" value="<%= m.id %>">
+      <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+    </form>
+  </div>
+<% }) %>
+
+<%- include('_foot') %>

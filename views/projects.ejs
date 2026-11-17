@@ -1,0 +1,55 @@
+<%- include('partials/head', { title: title }) %>
+
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow eyebrow-light">Projects</span>
+    <h1>Projects we've delivered</h1>
+    <p>A selection of our recent work across commercial, industrial, residential and infrastructure builds.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="filter-bar" id="filter-bar">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <% const cats = [...new Set(content.projects.map(function(p) { return p.category; }))]; %>
+      <% cats.forEach(function(cat) { %>
+        <button class="filter-btn" data-filter="<%= cat %>"><%= cat %></button>
+      <% }) %>
+    </div>
+
+    <div class="grid-3 project-grid" id="project-grid">
+      <% content.projects.forEach(function(p) { %>
+        <div class="card project-card" data-category="<%= p.category %>">
+          <div class="project-thumb">
+            <% if (p.image) { %>
+              <img src="<%= p.image %>" alt="<%= p.title %>">
+            <% } else { %>
+              <div class="thumb-placeholder"><span><%= p.category %></span></div>
+            <% } %>
+          </div>
+          <div class="project-meta"><span class="tag"><%= p.category %></span><span><%= p.date %></span></div>
+          <h3><%= p.title %></h3>
+          <p><%= p.description %></p>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<script>
+  var buttons = document.querySelectorAll('.filter-btn');
+  var cards = document.querySelectorAll('#project-grid .project-card');
+  buttons.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var filter = btn.getAttribute('data-filter');
+      buttons.forEach(function (b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      cards.forEach(function (card) {
+        card.style.display = (filter === 'all' || card.getAttribute('data-category') === filter) ? '' : 'none';
+      });
+    });
+  });
+</script>
+
+<%- include('partials/footer') %>
