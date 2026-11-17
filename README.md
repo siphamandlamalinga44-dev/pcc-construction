@@ -78,3 +78,17 @@ construction-website/
     ├── css/style.css
     └── js/admin.js
 ```
+
+## 📹 Videos
+
+- **Per project**: each project can have an optional video (`/admin/projects`).
+- **Dedicated Videos page** at `/videos`, fully manageable in `/admin/videos`.
+
+**Supported video sources** (add in the admin form):
+1. **YouTube** — paste the full link, e.g. `https://www.youtube.com/watch?v=...`
+2. **Vimeo** — paste the full link, e.g. `https://vimeo.com/123456789`
+3. **Direct video file** — an `.mp4` / `.webm` / `.ogg` link
+4. **File upload** — click "Choose video file" in the admin form (up to 20 MB; the file is stored in the page data)
+
+When a project or video has no video, nothing extra is shown.
+
