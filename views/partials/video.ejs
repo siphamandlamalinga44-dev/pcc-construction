@@ -1,0 +1,32 @@
+<%
+  // Renders the right player for a video field.
+  // Supports: YouTube (watch/youtu.be/shorts/embed), Vimeo, direct .mp4 files,
+  // and falls back to a plain link for anything else.
+  const v = (video || '').trim();
+  if (!v) {
+%>
+<% } else {
+      const yt = v.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/|v\/)|youtu\.be\/)([\w-]{11})/);
+      const vimeo = v.match(/vimeo\.com\/(?:video\/|channels\/[\w]+\/|groups\/[\w]+\/videos\/)?(\d+)/);
+      if (yt) { %>
+        <div class="video-embed">
+          <iframe src="https://www.youtube.com/embed/<%= yt[1] %>" title="Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      <% } else if (vimeo) { %>
+        <div class="video-embed">
+          <iframe src="https://player.vimeo.com/video/<%= vimeo[1] %>" title="Video" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      <% } else if (/\.(mp4|webm|ogg)$/i.test(v)) { %>
+        <div class="video-embed">
+          <video controls preload="metadata" width="100%">
+            <source src="<%= v %>" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      <% } else { %>
+        <div class="video-embed">
+          <a class="btn btn-primary" href="<%= v %>" target="_blank" rel="noopener">Watch video</a>
+        </div>
+      <% }
+}
+%>

@@ -1,11 +1,16 @@
-// Converts a chosen image file into a data URL and stores it in the target input,
-// so project images can be uploaded without extra server-side multipart handling.
+// Converts a chosen file (image or video) into a data URL and stores it in the
+// target input, so assets can be uploaded without extra server-side handling.
 document.querySelectorAll('.file-to-dataurl').forEach(function (input) {
   input.addEventListener('change', function () {
     var file = input.files && input.files[0];
     if (!file) return;
-    if (file.size > 4 * 1024 * 1024) {
-      alert('That image is larger than 4 MB. Please choose a smaller image.');
+    var isVideo = file.type && file.type.indexOf('video/') === 0;
+    var maxSize = isVideo ? 20 * 1024 * 1024 : 4 * 1024 * 1024;
+    if (file.size > maxSize) {
+      alert(
+        'That ' + (isVideo ? 'video' : 'image') + ' is larger than ' +
+        (isVideo ? '20 MB' : '4 MB') + '. Please choose a smaller file or use a link instead.'
+      );
       return;
     }
     var reader = new FileReader();

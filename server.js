@@ -133,7 +133,8 @@ function defaultContent() {
         date: '2024',
         description:
           'A five-storey office development delivered on schedule with energy-efficient glazing and modern interiors.',
-        image: ''
+        image: '',
+        video: ''
       },
       {
         id: newId(),
@@ -142,7 +143,8 @@ function defaultContent() {
         date: '2023',
         description:
           'A 12,000 m² distribution warehouse with heavy-duty flooring and automated loading bays.',
-        image: ''
+        image: '',
+        video: ''
       },
       {
         id: newId(),
@@ -151,7 +153,8 @@ function defaultContent() {
         date: '2023',
         description:
           'A 48-unit secure estate with finishes and landscaping completed to a high standard.',
-        image: ''
+        image: '',
+        video: ''
       },
       {
         id: newId(),
@@ -160,7 +163,16 @@ function defaultContent() {
         date: '2022',
         description:
           'Dual-lane road resurfacing and stormwater drainage for a major municipal corridor.',
-        image: ''
+        image: '',
+        video: ''
+      }
+    ],
+    videos: [
+      {
+        id: newId(),
+        title: 'Sample Project Video',
+        description: 'This is a sample video entry - replace it with your own videos in the admin panel.',
+        video: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
       }
     ],
     contact: {
@@ -170,8 +182,8 @@ function defaultContent() {
     },
     footer: {
       text:
-        'Granite Peak Construction — trusted builders for commercial, residential, industrial and infrastructure projects.',
-      copyright: '© 2026 Granite Peak Construction. All rights reserved.'
+        'PCC – Philip Chauke Construction — trusted building, renovation and maintenance services across Gauteng.',
+      copyright: '© 2026 PCC – Philip Chauke Construction. All rights reserved.'
     }
   };
 }
@@ -183,15 +195,20 @@ if (!content) {
   content = defaultContent();
   saveJSON(CONTENT_FILE, content);
 }
+if (!Array.isArray(content.videos)) content.videos = [];
 let messages = loadJSON(MESSAGES_FILE, []);
 
 let admin = loadJSON(ADMIN_FILE, null);
 if (!admin) {
   const salt = crypto.randomBytes(16).toString('hex');
-  const generated = crypto.randomBytes(12).toString('base64url');
-  admin = { salt, hash: hashPassword(generated, salt) };
+  const initialPassword = process.env.ADMIN_PASSWORD || crypto.randomBytes(12).toString('base64url');
+  admin = { salt, hash: hashPassword(initialPassword, salt) };
   saveJSON(ADMIN_FILE, admin);
-  console.log('[admin] Admin account created. Password: ' + generated);
+  if (process.env.ADMIN_PASSWORD) {
+    console.log('[admin] Admin account created from ADMIN_PASSWORD env var.');
+  } else {
+    console.log('[admin] Admin account created. Password: ' + initialPassword);
+  }
 }
 
 // ------------------------------------------------------------- email notifications
@@ -315,6 +332,7 @@ app.get('/', (req, res) => render(res, 'home', { title: 'Home' }));
 app.get('/about', (req, res) => render(res, 'about', { title: 'About Us' }));
 app.get('/services', (req, res) => render(res, 'services', { title: 'Services' }));
 app.get('/projects', (req, res) => render(res, 'projects', { title: 'Projects' }));
+app.get('/videos', (req, res) => render(res, 'videos', { title: 'Videos' }));
 
 app.get('/contact', (req, res) =>
   render(res, 'contact', { title: 'Contact Us', sent: req.query.sent === '1' })
@@ -467,7 +485,7 @@ app.get('/admin/projects', requireAdmin, (req, res) => {
 });
 
 app.post('/admin/projects/save', requireAdmin, (req, res) => {
-  const { id, title, category, date, description, image } = req.body;
+  const { id, title, category, date, description, image, video } = req.body;
   if (!title || !description) {
     flash(req, 'error', 'Project title and description are required.');
     return res.redirect('/admin/projects');
@@ -479,6 +497,7 @@ app.post('/admin/projects/save', requireAdmin, (req, res) => {
     p.date = date || p.date;
     p.description = description;
     if (image) p.image = image;
+    if (video) p.video = video;
   } else {
     content.projects.push({
       id: newId(),
@@ -486,7 +505,8 @@ app.post('/admin/projects/save', requireAdmin, (req, res) => {
       category: category || 'General',
       date: date || new Date().getFullYear().toString(),
       description,
-      image: image || ''
+      image: image || '',
+      video: video || ''
     });
   }
   saveJSON(CONTENT_FILE, content);
@@ -499,6 +519,37 @@ app.post('/admin/projects/delete', requireAdmin, (req, res) => {
   saveJSON(CONTENT_FILE, content);
   flash(req, 'success', 'Project deleted.');
   res.redirect('/admin/projects');
+});
+
+// ------------------------------------------------------------- admin: videos
+app.get('/admin/videos', requireAdmin, (req, res) => {
+  res.render('admin/videos', { title: 'Manage Videos', videos: content.videos });
+});
+
+app.post('/admin/videos/save', requireAdmin, (req, res) => {
+  const { id, title, description, video } = req.body;
+  if (!title || !video) {
+    flash(req, 'error', 'Video title and a video link/upload are required.');
+    return res.redirect('/admin/videos');
+  }
+  if (id && content.videos.some((v) => v.id === id)) {
+    const v = content.videos.find((v) => v.id === id);
+    v.title = title;
+    v.description = description || v.description;
+    if (video) v.video = video;
+  } else {
+    content.videos.push({ id: newId(), title, description: description || '', video });
+  }
+  saveJSON(CONTENT_FILE, content);
+  flash(req, 'success', 'Video saved.');
+  res.redirect('/admin/videos');
+});
+
+app.post('/admin/videos/delete', requireAdmin, (req, res) => {
+  content.videos = content.videos.filter((v) => v.id !== req.body.id);
+  saveJSON(CONTENT_FILE, content);
+  flash(req, 'success', 'Video deleted.');
+  res.redirect('/admin/videos');
 });
 
 // ------------------------------------------------------------- admin: messages

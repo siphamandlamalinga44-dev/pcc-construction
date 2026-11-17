@@ -123,7 +123,8 @@
       "category": "Commercial",
       "date": "2024",
       "description": "A full office renovation delivered on schedule with modern finishes and updated infrastructure.",
-      "image": ""
+      "image": "",
+      "video": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
     },
     {
       "id": "8def87a7-150c-426e-b56b-2a500ca87d4e",
@@ -157,5 +158,13 @@
   "footer": {
     "text": "PCC – Philip Chauke Construction — trusted building, renovation and maintenance services across Gauteng.",
     "copyright": "© 2026 PCC – Philip Chauke Construction. All rights reserved."
-  }
+  },
+  "videos": [
+    {
+      "id": "ac1a0267-34b2-4c23-a62a-bc2e34a0d547",
+      "title": "Build Timelapse",
+      "description": "A short timelapse of a commercial build from foundation to handover.",
+      "video": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    }
+  ]
 }

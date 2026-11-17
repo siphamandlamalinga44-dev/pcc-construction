@@ -1,0 +1,28 @@
+<%- include('partials/head', { title: title }) %>
+
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow eyebrow-light">Videos</span>
+    <h1>Watch our work</h1>
+    <p>Project highlights, build walkthroughs and more — see how we deliver.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="grid-2">
+      <% content.videos.forEach(function(v) { %>
+        <div class="card video-card">
+          <%- include('partials/video', { video: v.video }) %>
+          <h3><%= v.title %></h3>
+          <% if (v.description) { %><p><%= v.description %></p><% } %>
+        </div>
+      <% }) %>
+      <% if (!content.videos.length) { %>
+        <p class="muted">No videos yet — add some in the admin panel.</p>
+      <% } %>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

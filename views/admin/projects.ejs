@@ -1,7 +1,7 @@
 <%- include('_head', { title: title }) %>
 
 <h1>Projects</h1>
-<p class="muted">Manage your project portfolio. Add a project image by uploading a file or pasting an image URL.</p>
+<p class="muted">Manage your project portfolio. Add a project image and an optional video (YouTube, Vimeo or .mp4 link, or upload a small video file).</p>
 
 <div class="admin-split">
   <div class="admin-list">
@@ -12,7 +12,7 @@
         </div>
         <div class="admin-row-main">
           <strong><%= p.title %></strong>
-          <span class="muted small"><%= p.category %> · <%= p.date %> — <%= p.description %></span>
+          <span class="muted small"><%= p.category %> · <%= p.date %><% if (p.video) { %> · 🎬 has video<% } %> — <%= p.description %></span>
         </div>
         <button class="btn btn-outline btn-sm" onclick="editProject('<%= p.id %>')">Edit</button>
         <form method="post" action="/admin/projects/delete" style="display:inline" onsubmit="return confirm('Delete this project?')">
@@ -40,6 +40,12 @@
         <p class="muted small">Or paste an image URL:</p>
         <input type="text" name="image" id="project-image" placeholder="https://...">
       </div>
+      <div class="field">
+        <label>Project video <span class="muted">(optional)</span></label>
+        <input type="file" id="project-video-file" accept="video/*" class="file-to-dataurl" data-target="project-video">
+        <p class="muted small">Or paste a video link (YouTube, Vimeo or .mp4 URL):</p>
+        <input type="text" name="video" id="project-video" placeholder="https://www.youtube.com/watch?v=...">
+      </div>
       <button type="submit" class="btn btn-primary">Save Project</button>
       <button type="button" class="btn btn-outline" onclick="clearProject()">Clear</button>
     </form>
@@ -49,7 +55,6 @@
 <script src="/js/admin.js"></script>
 <script>
   var projectsData = <%- JSON.stringify(projects) %>;
-  window.PROJECTS = projectsData;
   function editProject(id) {
     var p = projectsData.find(function (x) { return x.id === id; });
     if (!p) return;
@@ -59,6 +64,7 @@
     document.getElementById('project-date').value = p.date;
     document.getElementById('project-description').value = p.description;
     document.getElementById('project-image').value = p.image || '';
+    document.getElementById('project-video').value = p.video || '';
   }
   function clearProject() {
     document.getElementById('project-form').reset();
