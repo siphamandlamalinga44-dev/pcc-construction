@@ -4,19 +4,19 @@
     "tagline": "Building Your Vision, Built to Last",
     "phone": "+27 11 000 0000",
     "email": "info@pccconstruction.co.za",
-    "address": "Gauteng, South Africa",
+    "address": "South Africa",
     "established": "2009"
   },
   "hero": {
     "title": "Building Your Vision, One Foundation at a Time",
-    "subtitle": "From renovations and plastering to roofing, electrical, plumbing and more — PCC delivers quality, reliable construction services across Gauteng.",
+    "subtitle": "From renovations and plastering to roofing, electrical, plumbing and more — PCC delivers quality, reliable construction services across all provinces of South Africa.",
     "ctaText": "Get a Free Quote"
   },
   "home": {
-    "aboutPreview": "PCC – Philip Chauke Construction is a trusted building and renovation contractor, delivering quality workmanship across Gauteng — from small repairs to complete new builds.",
+    "aboutPreview": "PCC – Philip Chauke Construction is a trusted building and renovation contractor, delivering quality workmanship across all provinces of South Africa — from small repairs to complete new builds.",
     "stats": [
       {
-        "value": "15+",
+        "value": "19+",
         "label": "Years in Business"
       },
       {
@@ -49,7 +49,7 @@
   },
   "about": {
     "body": [
-      "PCC – Philip Chauke Construction is a building and renovation contractor serving clients across Gauteng. From new builds to renovations and repairs, we deliver quality workmanship on every project, big or small.",
+      "PCC – Philip Chauke Construction is a building and renovation contractor serving clients in every province of South Africa. From new builds to renovations and repairs, we deliver quality workmanship on every project, big or small.",
       "We take on the full scope of a build — planning, structural work, finishes, and handover — so you have one accountable team from start to finish.",
       "With a focus on honest pricing, reliable timelines and work that lasts, we deliver results our clients can trust."
     ]
@@ -156,10 +156,16 @@
     "hours": "Office hours: Monday – Friday, 07:30 – 17:00"
   },
   "footer": {
-    "text": "PCC – Philip Chauke Construction — trusted building, renovation and maintenance services across Gauteng.",
+    "text": "PCC – Philip Chauke Construction — trusted building, renovation and maintenance services across South Africa.",
     "copyright": "© 2026 PCC – Philip Chauke Construction. All rights reserved."
   },
   "videos": [
+    {
+      "id": "b7e2d94a-1c35-4f8a-9e6d-2a4f7c8b1d5e",
+      "title": "Welcome to PCC",
+      "description": "A warm welcome from PCC — Philip Chauke Construction. A quick look at who we are, what we build and how we work, wherever you are in South Africa.",
+      "video": "/videos/welcome.mp4"
+    },
     {
       "id": "ac1a0267-34b2-4c23-a62a-bc2e34a0d547",
       "title": "Build Timelapse",

@@ -315,6 +315,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use('/css', express.static(path.join(__dirname, 'public/css')));
 app.use('/js', express.static(path.join(__dirname, 'public/js')));
+app.use('/videos', express.static(path.join(__dirname, 'public/videos'), { redirect: false }));
 
 app.use((req, res, next) => {
   req.session = getSession(req);
