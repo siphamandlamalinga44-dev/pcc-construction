@@ -53,7 +53,7 @@
 <div class="lightbox" id="lightbox" onclick="closeLightbox()">
   <button class="lightbox-close" onclick="closeLightbox()" aria-label="Close">✕</button>
   <% if (content.projects.length) { %>
-    <button class="lightbox-nav lightbox-prev" onclick="lbStep(-1)" aria-label="Previous">‹</button>
+    <button class="lightbox-nav lightbox-prev" onclick="event.stopPropagation(); lbStep(-1)" aria-label="Previous">‹</button>
   <% } %>
   <div class="lightbox-inner" onclick="event.stopPropagation()">
     <img id="lightbox-img" src="" alt="">
@@ -63,7 +63,7 @@
     <% } %>
   </div>
   <% if (content.projects.length) { %>
-    <button class="lightbox-nav lightbox-next" onclick="lbStep(1)" aria-label="Next">›</button>
+    <button class="lightbox-nav lightbox-next" onclick="event.stopPropagation(); lbStep(1)" aria-label="Next">›</button>
   <% } %>
 </div>
 
