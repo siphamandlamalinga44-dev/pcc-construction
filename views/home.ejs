@@ -94,6 +94,27 @@
   </div>
 </section>
 
+<% if ((content.testimonials || []).length) { %>
+<section class="section section-alt testimonials-section">
+  <div class="container">
+    <span class="eyebrow">What our clients say</span>
+    <h2 class="section-heading">Trusted across South Africa</h2>
+    <div class="grid-3 testimonials-grid">
+      <% content.testimonials.forEach(function(t) { %>
+        <div class="card testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-quote">“<%= t.quote %>”</p>
+          <div class="testimonial-author">
+            <strong><%= t.name %></strong>
+            <span><%= t.role %> · <%= t.location %></span>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+</section>
+<% } %>
+
 <section class="cta-band">
   <div class="container cta-inner">
     <h2>Ready to start your build?</h2>

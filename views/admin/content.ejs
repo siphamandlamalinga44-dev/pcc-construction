@@ -12,11 +12,18 @@
     </div>
     <div class="field-row">
       <div class="field"><label>Phone</label><input type="text" name="site.phone" value="<%= content.site.phone %>"></div>
-      <div class="field"><label>Email</label><input type="email" name="site.email" value="<%= content.site.email %>"></div>
+      <div class="field"><label>WhatsApp number</label><input type="text" name="site.whatsapp" value="<%= content.site.whatsapp %>" placeholder="+27 82 123 4567"></div>
     </div>
     <div class="field-row">
+      <div class="field"><label>Email</label><input type="email" name="site.email" value="<%= content.site.email %>"></div>
       <div class="field"><label>Address</label><input type="text" name="site.address" value="<%= content.site.address %>"></div>
     </div>
+  </fieldset>
+
+  <fieldset class="admin-fieldset">
+    <legend>Search engines (SEO)</legend>
+    <p class="muted small">The short description search engines show under your site name in results.</p>
+    <div class="field"><label>Meta description</label><textarea name="site.metaDescription" rows="3"><%= content.site.metaDescription %></textarea></div>
   </fieldset>
 
   <fieldset class="admin-fieldset">
@@ -57,6 +64,14 @@
       </div>
     <% } %>
   </fieldset>
+
+  <h3 class="subhead">Team member</h3>
+  <div class="field-row">
+    <div class="field"><label>Name</label><input type="text" name="team.name" value="<%= content.about.team && content.about.team[0] ? content.about.team[0].name : '' %>"></div>
+    <div class="field"><label>Role</label><input type="text" name="team.role" value="<%= content.about.team && content.about.team[0] ? content.about.team[0].role : '' %>"></div>
+  </div>
+  <div class="field"><label>Bio</label><textarea name="team.bio" rows="4"><%= content.about.team && content.about.team[0] ? content.about.team[0].bio : '' %></textarea></div>
+  <div class="field"><label>Team photo URL</label><input type="text" name="about.teamImage" value="<%= content.about.teamImage %>" placeholder="/images/your-photo.jpg"></div>
 
   <fieldset class="admin-fieldset">
     <legend>Contact page</legend>

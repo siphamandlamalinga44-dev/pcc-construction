@@ -7,7 +7,7 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const DATA_DIR = path.join(__dirname, 'data');
+const DATA_DIR = process.env.DATA_DIR ? path.resolve(process.env.DATA_DIR) : path.join(__dirname, 'data');
 const CONTENT_FILE = path.join(DATA_DIR, 'content.json');
 const MESSAGES_FILE = path.join(DATA_DIR, 'messages.json');
 const ADMIN_FILE = path.join(DATA_DIR, 'admin.json');
@@ -16,6 +16,18 @@ const SESSION_TTL_MS = 1000 * 60 * 60 * 8; // 8 hours
 // ---------------------------------------------------------------- data layer
 function ensureDataFiles() {
   if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
+  // When running on an attached disk (Render persistent disk), the disk starts
+  // empty. Seed it from the committed repo data so the site boots with full
+  // content; after that, admin edits on the disk take over.
+  if (process.env.DATA_DIR) {
+    const repoData = path.join(__dirname, 'data');
+    const dst = path.join(DATA_DIR, 'content.json');
+    const src = path.join(repoData, 'content.json');
+    if (!fs.existsSync(dst) && fs.existsSync(src)) {
+      fs.copyFileSync(src, dst);
+      console.log('[data] Seeded content.json from repo onto the data disk.');
+    }
+  }
 }
 
 function loadJSON(file, fallback) {
@@ -216,14 +228,19 @@ let transporter = null;
 
 function getTransporter() {
   if (transporter) return transporter;
-  if (!process.env.SMTP_HOST) return null;
-  const port = parseInt(process.env.SMTP_PORT || '587', 10);
+  const settings = loadJSON(path.join(DATA_DIR, 'settings.json'), null) || {};
+  const smtp = settings.smtp || {};
+  const host = process.env.SMTP_HOST || smtp.host || '';
+  if (!host) return null;
+  const port = parseInt(process.env.SMTP_PORT || smtp.port || '587', 10);
+  const user = process.env.SMTP_USER || smtp.user || '';
+  const pass = process.env.SMTP_PASS || smtp.pass || '';
   transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
+    host,
     port,
     secure: port === 465,
-    auth: process.env.SMTP_USER
-      ? { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS }
+    auth: user
+      ? { user, pass }
       : undefined
   });
   return transporter;
@@ -231,21 +248,26 @@ function getTransporter() {
 
 async function sendEnquiryEmail(msg) {
   const t = getTransporter();
+  const settings = loadJSON(path.join(DATA_DIR, 'settings.json'), null) || {};
+  const smtp = settings.smtp || {};
   if (!t) {
     console.log(`[email] SMTP not configured - enquiry from ${msg.name} (${msg.email}) saved to admin only.`);
     return;
   }
   try {
     await t.sendMail({
-      from: process.env.MAIL_FROM || process.env.SMTP_USER,
-      to: process.env.MAIL_TO || process.env.SMTP_USER,
+      from: process.env.MAIL_FROM || smtp.from || process.env.SMTP_USER,
+      to: process.env.MAIL_TO || smtp.to || process.env.SMTP_USER,
       subject: `New website enquiry from ${msg.name}`,
       text:
         `New enquiry via the website contact form\n\n` +
         `Name: ${msg.name}\n` +
         `Email: ${msg.email}\n` +
-        `Phone: ${msg.phone || '-'}\n\n` +
-        `Message:\n${msg.message}`
+        `Phone: ${msg.phone || '-'}\n` +
+        (msg.projectType ? `Project type: ${msg.projectType}\n` : '') +
+        (msg.budget ? `Budget: ${msg.budget}\n` : '') +
+        (msg.timeline ? `Timeline: ${msg.timeline}\n` : '') +
+        `\nMessage:\n${msg.message}`
     });
     console.log(`[email] Notification sent for enquiry from ${msg.name}.`);
   } catch (e) {
@@ -316,6 +338,7 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use('/css', express.static(path.join(__dirname, 'public/css')));
 app.use('/js', express.static(path.join(__dirname, 'public/js')));
 app.use('/videos', express.static(path.join(__dirname, 'public/videos'), { redirect: false }));
+app.use(express.static(path.join(__dirname, 'public'), { redirect: false }));
 
 app.use((req, res, next) => {
   req.session = getSession(req);
@@ -340,7 +363,7 @@ app.get('/contact', (req, res) =>
 );
 
 app.post('/contact', (req, res) => {
-  const { name, email, phone, message } = req.body;
+  const { name, email, phone, projectType, budget, timeline, message } = req.body;
   if (!name || !email || !message) {
     return res.redirect('/contact?sent=error');
   }
@@ -349,12 +372,33 @@ app.post('/contact', (req, res) => {
     name,
     email,
     phone: phone || '',
+    projectType: projectType || '',
+    budget: budget || '',
+    timeline: timeline || '',
     message,
     date: new Date().toISOString()
   });
   saveJSON(MESSAGES_FILE, messages);
-  sendEnquiryEmail({ name, email, phone: phone || '', message }).catch(() => {});
+  sendEnquiryEmail({ name, email, phone: phone || '', projectType, budget, timeline, message }).catch(() => {});
   res.redirect('/contact?sent=1');
+});
+
+// ------------------------------------------------------------- SEO: sitemap
+app.get('/sitemap.xml', (req, res) => {
+  const host = req.protocol + '://' + req.get('host');
+  const pages = ['', 'about', 'services', 'projects', 'videos', 'contact'];
+  const today = new Date().toISOString().slice(0, 10);
+  const xml =
+    '<?xml version="1.0" encoding="UTF-8"?>\n' +
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
+    pages
+      .map(
+        (p) =>
+          `  <url><loc>${host}/${p}</loc><lastmod>${today}</lastmod></url>`
+      )
+      .join('\n') +
+    '\n</urlset>\n';
+  res.type('application/xml').send(xml);
 });
 
 // ------------------------------------------------------------- admin: auth
@@ -389,6 +433,8 @@ app.get('/admin', requireAdmin, (req, res) => {
     counts: {
       services: content.services.length,
       projects: content.projects.length,
+      videos: (content.videos || []).length,
+      testimonials: (content.testimonials || []).length,
       messages: messages.length
     }
   });
@@ -411,6 +457,15 @@ app.post('/admin/content', requireAdmin, (req, res) => {
   set(content.site, 'email', c['site.email']);
   set(content.site, 'address', c['site.address']);
   set(content.site, 'established', c['site.established']);
+  set(content.site, 'whatsapp', c['site.whatsapp']);
+  set(content.site, 'metaDescription', c['site.metaDescription']);
+
+  set(content.about, 'teamImage', c['about.teamImage']);
+  if (content.about.team && content.about.team.length) {
+    set(content.about.team[0], 'name', c['team.name']);
+    set(content.about.team[0], 'role', c['team.role']);
+    set(content.about.team[0], 'bio', c['team.bio']);
+  }
 
   set(content.hero, 'title', c['hero.title']);
   set(content.hero, 'subtitle', c['hero.subtitle']);
@@ -571,6 +626,62 @@ app.post('/admin/messages/delete', requireAdmin, (req, res) => {
   saveJSON(MESSAGES_FILE, messages);
   flash(req, 'success', 'Message deleted.');
   res.redirect('/admin/messages');
+});
+
+// ------------------------------------------------------------- admin: testimonials
+app.get('/admin/testimonials', requireAdmin, (req, res) => {
+  res.render('admin/testimonials', { title: 'Manage Testimonials', testimonials: content.testimonials || [], saved: req.query.saved === '1' });
+});
+
+app.post('/admin/testimonials/save', requireAdmin, (req, res) => {
+  if (!content.testimonials) content.testimonials = [];
+  const t = req.body;
+  const item = {
+    id: t.id || newId(),
+    quote: t.quote || '',
+    name: t.name || '',
+    role: t.role || '',
+    location: t.location || ''
+  };
+  if (!item.quote) {
+    flash(req, 'error', 'A testimonial quote is required.');
+    return res.redirect('/admin/testimonials');
+  }
+  const idx = content.testimonials.findIndex((x) => x.id === item.id);
+  if (idx > -1) content.testimonials[idx] = item;
+  else content.testimonials.push(item);
+  saveJSON(CONTENT_FILE, content);
+  flash(req, 'success', 'Testimonial saved.');
+  res.redirect('/admin/testimonials?saved=1');
+});
+
+app.post('/admin/testimonials/delete', requireAdmin, (req, res) => {
+  content.testimonials = (content.testimonials || []).filter((x) => x.id !== req.body.id);
+  saveJSON(CONTENT_FILE, content);
+  flash(req, 'success', 'Testimonial deleted.');
+  res.redirect('/admin/testimonials');
+});
+
+// ------------------------------------------------------------- admin: settings (SMTP)
+app.get('/admin/settings', requireAdmin, (req, res) => {
+  const settings = loadJSON(path.join(DATA_DIR, 'settings.json'), {}) || {};
+  res.render('admin/settings', { title: 'Email Settings', smtp: settings.smtp || {}, saved: req.query.saved === '1' });
+});
+
+app.post('/admin/settings', requireAdmin, (req, res) => {
+  const settings = loadJSON(path.join(DATA_DIR, 'settings.json'), {}) || {};
+  settings.smtp = {
+    host: (req.body.host || '').trim(),
+    port: (req.body.port || '587').trim(),
+    user: (req.body.user || '').trim(),
+    pass: (req.body.pass || '').trim(),
+    from: (req.body.from || '').trim(),
+    to: (req.body.to || '').trim()
+  };
+  saveJSON(path.join(DATA_DIR, 'settings.json'), settings);
+  transporter = null; // force reload with the new config
+  flash(req, 'success', 'Email settings saved. New enquiries will now be emailed to you.');
+  res.redirect('/admin/settings?saved=1');
 });
 
 // ------------------------------------------------------------- admin: password

@@ -3,60 +3,89 @@
 <section class="page-hero">
   <div class="container">
     <span class="eyebrow eyebrow-light">Projects</span>
-    <h1>Projects we've delivered</h1>
-    <p>A selection of our recent work across commercial, industrial, residential and infrastructure builds.</p>
+    <h1>Our work</h1>
+    <p>A selection of builds delivered by PC Chauke Construction and Projects CC — across all provinces of South Africa.</p>
   </div>
 </section>
 
 <section class="section">
   <div class="container">
-    <div class="filter-bar" id="filter-bar">
-      <button class="filter-btn active" data-filter="all">All</button>
-      <% const cats = [...new Set(content.projects.map(function(p) { return p.category; }))]; %>
+    <div class="gallery-filters" id="gallery-filters">
+      <button class="filter-btn is-active" data-cat="all">All</button>
+      <% const cats = []; content.projects.forEach(function(p) { if (p.category && cats.indexOf(p.category) === -1) cats.push(p.category); }); %>
       <% cats.forEach(function(cat) { %>
-        <button class="filter-btn" data-filter="<%= cat %>"><%= cat %></button>
+        <button class="filter-btn" data-cat="<%= cat %>"><%= cat %></button>
       <% }) %>
     </div>
 
-    <div class="grid-3 project-grid" id="project-grid">
+    <div class="gallery-grid" id="gallery-grid">
       <% content.projects.forEach(function(p) { %>
-        <div class="card project-card" data-category="<%= p.category %>">
-          <div class="project-thumb">
+        <article class="gallery-card" data-cat="<%= p.category || '' %>">
+          <div class="gallery-media">
             <% if (p.image) { %>
-              <img src="<%= p.image %>" alt="<%= p.title %>">
-            <% } else if (p.video) { %>
-              <div class="thumb-placeholder"><span><%= p.category %></span></div>
+              <img src="<%= p.image %>" alt="<%= p.title %>" class="gallery-img" onclick="openLightbox('<%= p.image %>', '<%= p.title %>')">
             <% } else { %>
-              <div class="thumb-placeholder"><span><%= p.category %></span></div>
+              <div class="thumb-placeholder gallery-img" onclick="openLightbox('', '<%= p.title %>')"><span><%= p.category %></span></div>
+            <% } %>
+            <% if (p.video) { %>
+              <span class="gallery-video-badge">▶ Video</span>
+              <%- include('partials/video', { video: p.video }) %>
             <% } %>
           </div>
-          <% if (p.video) { %>
-            <div class="project-video">
-              <%- include('partials/video', { video: p.video }) %>
-            </div>
-          <% } %>
-          <div class="project-meta"><span class="tag"><%= p.category %></span><span><%= p.date %></span></div>
-          <h3><%= p.title %></h3>
-          <p><%= p.description %></p>
-        </div>
+          <div class="gallery-body">
+            <span class="gallery-cat"><%= p.category %> · <%= p.date %></span>
+            <h3><%= p.title %></h3>
+            <p><%= p.description %></p>
+          </div>
+        </article>
       <% }) %>
+      <% if (!content.projects.length) { %>
+        <p class="muted">No projects yet — add some in the admin panel.</p>
+      <% } %>
     </div>
   </div>
 </section>
 
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()" aria-label="Close">✕</button>
+  <div class="lightbox-inner" onclick="event.stopPropagation()">
+    <img id="lightbox-img" src="" alt="">
+    <p class="lightbox-caption" id="lightbox-caption"></p>
+  </div>
+</div>
+
+<%- include('partials/footer') %>
+
 <script>
-  var buttons = document.querySelectorAll('.filter-btn');
-  var cards = document.querySelectorAll('#project-grid .project-card');
-  buttons.forEach(function (btn) {
+  function openLightbox(src, caption) {
+    var box = document.getElementById('lightbox');
+    var img = document.getElementById('lightbox-img');
+    document.getElementById('lightbox-caption').textContent = caption;
+    if (src) {
+      img.src = src;
+      img.style.display = 'block';
+    } else {
+      img.style.display = 'none';
+    }
+    box.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    var box = document.getElementById('lightbox');
+    box.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeLightbox();
+  });
+  document.querySelectorAll('.filter-btn').forEach(function (btn) {
     btn.addEventListener('click', function () {
-      var filter = btn.getAttribute('data-filter');
-      buttons.forEach(function (b) { b.classList.remove('active'); });
-      btn.classList.add('active');
-      cards.forEach(function (card) {
-        card.style.display = (filter === 'all' || card.getAttribute('data-category') === filter) ? '' : 'none';
+      document.querySelectorAll('.filter-btn').forEach(function (b) { b.classList.remove('is-active'); });
+      btn.classList.add('is-active');
+      var cat = btn.getAttribute('data-cat');
+      document.querySelectorAll('.gallery-card').forEach(function (card) {
+        card.style.display = (cat === 'all' || card.getAttribute('data-cat') === cat) ? '' : 'none';
       });
     });
   });
 </script>
-
-<%- include('partials/footer') %>

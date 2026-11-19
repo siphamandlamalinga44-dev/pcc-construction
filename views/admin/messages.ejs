@@ -13,6 +13,9 @@
       <strong><%= m.name %></strong>
       <span class="muted small">
         <%= m.email %><% if (m.phone) { %> · <%= m.phone %><% } %>
+        <% if (m.projectType) { %> · <%= m.projectType %><% } %>
+        <% if (m.budget) { %> · Budget: <%= m.budget %><% } %>
+        <% if (m.timeline) { %> · <%= m.timeline %><% } %>
         · <%= new Date(m.date).toLocaleString() %>
       </span>
       <div class="msg-body"><%= m.message %></div>

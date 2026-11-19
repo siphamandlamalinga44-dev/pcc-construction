@@ -16,6 +16,15 @@
         <p><a href="tel:<%= content.site.phone %>"><%= content.site.phone %></a></p>
       </div>
       <div class="info-card">
+        <h3>Message us on WhatsApp</h3>
+        <% const wa = (content.site.whatsapp || '').replace(/[^\d]/g, ''); %>
+        <% if (wa) { %>
+          <p><a href="https://wa.me/<%= wa %>" target="_blank" rel="noopener"><%= content.site.whatsapp %></a></p>
+        <% } else { %>
+          <p><%= content.site.phone %></p>
+        <% } %>
+      </div>
+      <div class="info-card">
         <h3>Email us</h3>
         <p><a href="mailto:<%= content.site.email %>"><%= content.site.email %></a></p>
       </div>
@@ -33,17 +42,13 @@
       <% if (sent === '1') { %>
         <div class="alert alert-success">Thank you! Your enquiry has been received. We will get back to you within one business day.</div>
       <% } else if (sent === 'error') { %>
-        <div class="alert alert-error">Please fill in your name, email and message.</div>
+        <div class="alert alert-error">Please fill in your name, email and project details.</div>
       <% } %>
       <form method="post" action="/contact">
-        <div class="field">
-          <label for="name">Name</label>
-          <input type="text" id="name" name="name" required>
-        </div>
         <div class="field-row">
           <div class="field">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required>
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
           </div>
           <div class="field">
             <label for="phone">Phone <span class="muted">(optional)</span></label>
@@ -51,8 +56,47 @@
           </div>
         </div>
         <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="projectType">What do you need?</label>
+            <select id="projectType" name="projectType">
+              <option value="">Select a service…</option>
+              <% content.services.forEach(function(s) { %>
+                <option value="<%= s.title %>"><%= s.title %></option>
+              <% }) %>
+              <option value="New build">New build</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="budget">Estimated budget</label>
+            <select id="budget" name="budget">
+              <option value="">Select a range…</option>
+              <option value="Under R50 000">Under R50 000</option>
+              <option value="R50 000 – R200 000">R50 000 – R200 000</option>
+              <option value="R200 000 – R1 million">R200 000 – R1 million</option>
+              <option value="Over R1 million">Over R1 million</option>
+              <option value="Not sure yet">Not sure yet</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="timeline">Timeline</label>
+          <select id="timeline" name="timeline">
+            <option value="">Select a timeframe…</option>
+            <option value="As soon as possible">As soon as possible</option>
+            <option value="Within 1 month">Within 1 month</option>
+            <option value="1 – 3 months">1 – 3 months</option>
+            <option value="3 – 6 months">3 – 6 months</option>
+            <option value="Later / just planning">Later / just planning</option>
+          </select>
+        </div>
+        <div class="field">
           <label for="message">Project details</label>
-          <textarea id="message" name="message" rows="5" required placeholder="Tell us about your project — location, size, budget and timeline."></textarea>
+          <textarea id="message" name="message" rows="5" required placeholder="Tell us about your project — location, size and any specific requirements."></textarea>
         </div>
         <button type="submit" class="btn btn-primary btn-lg">Send Enquiry</button>
       </form>

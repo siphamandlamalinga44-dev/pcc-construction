@@ -1,0 +1,62 @@
+<%- include('_head', { title: title }) %>
+
+<h1>Testimonials</h1>
+<p class="muted">Client reviews shown on the homepage. Add a testimonial for each satisfied client.</p>
+
+<% if (saved) { %>
+  <div class="alert alert-success">Testimonial saved — it is now live on the homepage.</div>
+<% } %>
+
+<div class="admin-split">
+  <div class="admin-list">
+    <% testimonials.forEach(function(t) { %>
+      <div class="admin-row">
+        <div class="admin-row-main">
+          <strong><%= t.name %></strong>
+          <span class="muted small"><%= t.role %> · <%= t.location %></span>
+          <p class="admin-quote">“<%= t.quote %>”</p>
+        </div>
+        <button class="btn btn-outline btn-sm" onclick="editTestimonial('<%= t.id %>')">Edit</button>
+        <form method="post" action="/admin/testimonials/delete" style="display:inline" onsubmit="return confirm('Delete this testimonial?')">
+          <input type="hidden" name="id" value="<%= t.id %>">
+          <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+        </form>
+      </div>
+    <% }) %>
+    <% if (!testimonials.length) { %><p class="muted">No testimonials yet.</p><% } %>
+  </div>
+
+  <div class="admin-form-card">
+    <h3>Add / Edit Testimonial</h3>
+    <form method="post" action="/admin/testimonials/save" id="testimonial-form">
+      <input type="hidden" name="id" id="t-id" value="">
+      <div class="field"><label>Quote</label><textarea name="quote" id="t-quote" rows="4" required placeholder="What did the client say about the work?"></textarea></div>
+      <div class="field-row">
+        <div class="field"><label>Client name</label><input type="text" name="name" id="t-name"></div>
+        <div class="field"><label>Role</label><input type="text" name="role" id="t-role" placeholder="e.g. Homeowner"></div>
+      </div>
+      <div class="field"><label>Location</label><input type="text" name="location" id="t-location" placeholder="e.g. Pretoria"></div>
+      <button type="submit" class="btn btn-primary">Save Testimonial</button>
+      <button type="button" class="btn btn-outline" onclick="clearTestimonial()">Clear</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  var testimonialsData = <%- JSON.stringify(testimonials) %>;
+  function editTestimonial(id) {
+    var t = testimonialsData.find(function (x) { return x.id === id; });
+    if (!t) return;
+    document.getElementById('t-id').value = t.id;
+    document.getElementById('t-quote').value = t.quote;
+    document.getElementById('t-name').value = t.name;
+    document.getElementById('t-role').value = t.role;
+    document.getElementById('t-location').value = t.location;
+  }
+  function clearTestimonial() {
+    document.getElementById('testimonial-form').reset();
+    document.getElementById('t-id').value = '';
+  }
+</script>
+
+<%- include('_foot') %>

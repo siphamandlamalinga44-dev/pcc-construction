@@ -1,0 +1,32 @@
+<%- include('_head', { title: title }) %>
+
+<h1>Email Settings</h1>
+<p class="muted">Configure SMTP so new contact-form enquiries are emailed to you as well as saved in your Messages. Any mail provider works (Gmail, Outlook, etc.) — get the details from your email provider's settings.</p>
+
+<% if (saved) { %>
+  <div class="alert alert-success">Settings saved. Test by sending an enquiry from the contact page.</div>
+<% } %>
+
+<form method="post" action="/admin/settings">
+  <fieldset class="admin-fieldset">
+    <legend>SMTP server</legend>
+    <div class="field-row">
+      <div class="field"><label>SMTP host</label><input type="text" name="host" value="<%= smtp.host || '' %>" placeholder="smtp.gmail.com"></div>
+      <div class="field"><label>Port</label><input type="text" name="port" value="<%= smtp.port || '' %>" placeholder="587"></div>
+    </div>
+    <div class="field-row">
+      <div class="field"><label>Username</label><input type="text" name="user" value="<%= smtp.user || '' %>" placeholder="you@example.com"></div>
+      <div class="field"><label>Password / app password</label><input type="text" name="pass" value="<%= smtp.pass || '' %>" placeholder="••••••••"></div>
+    </div>
+    <div class="field-row">
+      <div class="field"><label>From address</label><input type="text" name="from" value="<%= smtp.from || '' %>" placeholder="you@example.com"></div>
+      <div class="field"><label>Send to</label><input type="text" name="to" value="<%= smtp.to || '' %>" placeholder="you@example.com"></div>
+    </div>
+  </fieldset>
+
+  <p class="muted small">For Gmail: enable two-factor authentication, then create an "App password" in your Google Account security settings and use it as the password.</p>
+
+  <button type="submit" class="btn btn-primary btn-lg">Save Settings</button>
+</form>
+
+<%- include('_foot') %>

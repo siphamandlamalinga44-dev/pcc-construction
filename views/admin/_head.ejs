@@ -16,7 +16,9 @@
         <a href="/admin/services" class="<%= title === 'Manage Services' ? 'active' : '' %>">Services</a>
         <a href="/admin/projects" class="<%= title === 'Manage Projects' ? 'active' : '' %>">Projects</a>
         <a href="/admin/videos" class="<%= title === 'Manage Videos' ? 'active' : '' %>">Videos</a>
+        <a href="/admin/testimonials" class="<%= title === 'Manage Testimonials' ? 'active' : '' %>">Testimonials</a>
         <a href="/admin/messages" class="<%= title === 'Contact Messages' ? 'active' : '' %>">Messages <% if (typeof counts !== 'undefined' && counts.messages) { %><span class="badge"><%= counts.messages %></span><% } %></a>
+        <a href="/admin/settings" class="<%= title === 'Email Settings' ? 'active' : '' %>">Email Settings</a>
         <a href="/admin/password" class="<%= title === 'Change Admin Password' ? 'active' : '' %>">Password</a>
         <a href="/" target="_blank">View site ↗</a>
         <form method="post" action="/admin/logout" style="margin-top:1rem">

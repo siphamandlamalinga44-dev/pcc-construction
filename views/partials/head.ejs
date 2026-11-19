@@ -4,6 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title><%= title %> · <%= content.site.companyName %></title>
+  <% if (content.site.metaDescription) { %>
+  <meta name="description" content="<%= content.site.metaDescription %>">
+  <meta property="og:title" content="<%= title %> · <%= content.site.companyName %>">
+  <meta property="og:description" content="<%= content.site.metaDescription %>">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="<%= content.site.companyName %>">
+  <meta name="twitter:card" content="summary_large_image">
+  <% } %>
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>

@@ -5,11 +5,13 @@
     "phone": "+27 11 000 0000",
     "email": "info@pccconstruction.co.za",
     "address": "South Africa",
-    "established": "2009"
+    "established": "2009",
+    "whatsapp": "+27 82 000 0000",
+    "metaDescription": "PC Chauke Construction and Projects CC — trusted building services across South Africa."
   },
   "hero": {
     "title": "Building Your Vision, One Foundation at a Time",
-    "subtitle": "From renovations and plastering to roofing, electrical, plumbing and more — PCC delivers quality, reliable construction services across all provinces of South Africa.",
+    "subtitle": "From renovations and plastering to roofing, electrical, plumbing and more — PC Chauke delivers quality, reliable construction services across all provinces of South Africa.",
     "ctaText": "Get a Free Quote"
   },
   "home": {
@@ -52,6 +54,14 @@
       "PC Chauke Construction and Projects CC is a building and renovation contractor serving clients in every province of South Africa. From new builds to renovations and repairs, we deliver quality workmanship on every project, big or small.",
       "We take on the full scope of a build — planning, structural work, finishes, and handover — so you have one accountable team from start to finish.",
       "With a focus on honest pricing, reliable timelines and work that lasts, we deliver results our clients can trust."
+    ],
+    "teamImage": "/images/team-placeholder.jpg",
+    "team": [
+      {
+        "name": "PC Chauke",
+        "role": "Founder & Managing Director",
+        "bio": "PC Chauke is the founder of PC Chauke Construction and Projects CC, with nineteen years of hands-on experience in residential, commercial and industrial builds across South Africa. PC leads every project with the same standard he built his reputation on: quality workmanship, honest pricing, and delivery on time."
+      }
     ]
   },
   "services": [
@@ -200,6 +210,26 @@
       "title": "Build Timelapse",
       "description": "A short timelapse of a commercial build from foundation to handover.",
       "video": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    }
+  ],
+  "testimonials": [
+    {
+      "quote": "PC Chauke and his team rebuilt our family home — on time, on budget, and the quality is outstanding. I would recommend them to anyone.",
+      "name": "Londiwe M.",
+      "role": "Homeowner",
+      "location": "Pretoria"
+    },
+    {
+      "quote": "We needed our office renovated with minimal disruption to business. PC Chauke Construction delivered exactly what was promised, and the finished result exceeded our expectations.",
+      "name": "Thabo N.",
+      "role": "Business Owner",
+      "location": "Johannesburg"
+    },
+    {
+      "quote": "From the house plans to the final handover, everything was handled professionally. Honest pricing and a team you can trust.",
+      "name": "Naledi K.",
+      "role": "Homeowner",
+      "location": "Cape Town"
     }
   ]
 }

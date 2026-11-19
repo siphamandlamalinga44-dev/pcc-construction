@@ -31,6 +31,27 @@
   </div>
 </section>
 
+<% if (content.about.team && content.about.team.length) { %>
+<section class="section">
+  <div class="container two-col team-section">
+    <div class="team-photo">
+      <% if (content.about.teamImage) { %>
+        <img src="<%= content.about.teamImage %>" alt="<%= content.about.team[0].name %>">
+      <% } else { %>
+        <div class="thumb-placeholder"><span>Team photo</span></div>
+      <% } %>
+    </div>
+    <div>
+      <span class="eyebrow">Meet the team</span>
+      <h2 class="section-heading"><%= content.about.team[0].name %></h2>
+      <p class="team-role"><%= content.about.team[0].role %></p>
+      <p class="lead"><%= content.about.team[0].bio %></p>
+      <a class="btn btn-outline" href="/contact">Start your project</a>
+    </div>
+  </div>
+</section>
+<% } %>
+
 <section class="cta-band">
   <div class="container cta-inner">
     <h2>Want to work with us?</h2>
