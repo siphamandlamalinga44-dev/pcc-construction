@@ -69,37 +69,45 @@
       "id": "33c60f06-e0bc-4cf3-8a1a-d08f227dcd5f",
       "icon": "🛠️",
       "title": "Renovations",
-      "description": "Full-home and section renovations: updates, extensions and modernisations that bring your space back to life."
+      "description": "Full-home and section renovations: updates, extensions and modernisations that bring your space back to life.",
+      "image": "/images/services/renovations-1.jpg",
+      "image2": "/images/services/renovations-2.jpg"
     },
     {
       "id": "d47b1678-a9bd-4a56-96f5-83bb8ac1b967",
       "icon": "🧱",
       "title": "Plastering",
-      "description": "Internal and external plastering and wall finishing for surfaces that are smooth, level and durable."
+      "description": "Internal and external plastering and wall finishing for surfaces that are smooth, level and durable.",
+      "image": "/images/services/plastering-1.jpg",
+      "image2": "/images/services/plastering-2.jpg"
     },
     {
       "id": "89fea460-9ee8-4381-9115-428b288436e5",
       "icon": "📋",
       "title": "Fisca Boards",
-      "description": "Installation and fitting of Fisca (fibre-cement) boards for walls, ceilings and roofing."
+      "description": "Installation and fitting of Fisca (fibre-cement) boards for walls, ceilings and roofing.",
+      "image": "/images/services/fisca-boards-1.jpg"
     },
     {
       "id": "a7fe9dcc-81f0-4ca0-8d6e-8fd7c3e94f63",
       "icon": "⚡",
       "title": "Electrical",
-      "description": "Complete electrical installations, repairs and maintenance for homes and businesses."
+      "description": "Complete electrical installations, repairs and maintenance for homes and businesses.",
+      "image": "/images/services/electrical-1.jpg"
     },
     {
       "id": "40a45208-324a-49f3-b214-7e3ae6822ff6",
       "icon": "🚰",
       "title": "Plumbing",
-      "description": "Plumbing installations, repairs and maintenance — from leaks and taps to full bathroom plumbing."
+      "description": "Plumbing installations, repairs and maintenance — from leaks and taps to full bathroom plumbing.",
+      "image": "/images/services/plumbing-1.jpg"
     },
     {
       "id": "3405d318-1ffe-40c2-aefb-39572be3e4a4",
       "icon": "🔌",
       "title": "House Wiring",
-      "description": "Professional house wiring and rewiring for new builds, renovations and older properties."
+      "description": "Professional house wiring and rewiring for new builds, renovations and older properties.",
+      "image": "/images/services/house-wiring-1.jpg"
     },
     {
       "id": "b9ccc7f9-e7cd-4327-92a5-dea1a7ad56ef",
@@ -111,19 +119,25 @@
       "id": "8f7b96d4-0b6d-4aa4-8919-2a173f357d7c",
       "icon": "🏠",
       "title": "Roofing",
-      "description": "Roof installation, repairs and replacements that keep your home safe and weatherproof."
+      "description": "Roof installation, repairs and replacements that keep your home safe and weatherproof.",
+      "image": "/images/services/roofing-1.jpg",
+      "image2": "/images/services/roofing-2.jpg"
     },
     {
       "id": "0bb8c086-b240-4f3e-9526-b1381553a03d",
       "icon": "🏗️",
       "title": "Ceiling",
-      "description": "Ceiling installation and repair, including drywall, fibre-cement and suspended ceilings."
+      "description": "Ceiling installation and repair, including drywall, fibre-cement and suspended ceilings.",
+      "image": "/images/services/ceiling-1.jpg",
+      "image2": "/images/services/ceiling-2.jpg"
     },
     {
       "id": "f74c44e6-6b3e-499f-8ff6-d8a15fdbb574",
       "icon": "🛁",
       "title": "Tile Fitting",
-      "description": "Tile installation and fitting for floors, walls and bathrooms with clean, lasting finishes."
+      "description": "Tile installation and fitting for floors, walls and bathrooms with clean, lasting finishes.",
+      "image": "/images/services/tile-fitting-1.jpg",
+      "image2": "/images/services/tile-fitting-2.jpg"
     }
   ],
   "projects": [

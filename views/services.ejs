@@ -10,12 +10,22 @@
 
 <section class="section">
   <div class="container">
-    <div class="grid-3">
+    <div class="grid-2 services-grid">
       <% content.services.forEach(function(s) { %>
         <div class="card service-card">
-          <div class="card-icon"><%= s.icon %></div>
-          <h3><%= s.title %></h3>
-          <p><%= s.description %></p>
+          <% if (s.image) { %>
+            <div class="service-photo">
+              <img src="<%= s.image %>" alt="<%= s.title %>">
+              <% if (s.image2) { %>
+                <img class="service-photo-2" src="<%= s.image2 %>" alt="<%= s.title %> (more)">
+              <% } %>
+            </div>
+          <% } %>
+          <div class="service-card-body">
+            <div class="card-icon"><%= s.icon %></div>
+            <h3><%= s.title %></h3>
+            <p><%= s.description %></p>
+          </div>
         </div>
       <% }) %>
     </div>

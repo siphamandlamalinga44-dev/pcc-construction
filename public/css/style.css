@@ -503,3 +503,33 @@ select {
   background: #fff;
   color: #24303c;
 }
+
+/* ============ Services with photos ============ */
+.services-grid { gap: 28px; }
+.service-card { padding: 0; overflow: hidden; }
+.service-photo { position: relative; line-height: 0; background: #eef1f5; }
+.service-photo img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  display: block;
+}
+.service-photo-2 {
+  position: absolute !important;
+  right: 10px;
+  bottom: 10px;
+  width: 130px !important;
+  aspect-ratio: 1 !important;
+  height: 130px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+  border: 3px solid #fff;
+}
+.service-card-body { padding: 20px 22px 24px; }
+.service-card-body .card-icon { font-size: 1.6rem; margin-bottom: 6px; }
+.service-card-body h3 { margin: 0 0 8px; }
+
+@media (max-width: 900px) {
+  .service-photo-2 { width: 90px !important; height: 90px !important; }
+}

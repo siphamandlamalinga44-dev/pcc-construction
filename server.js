@@ -518,7 +518,7 @@ app.get('/admin/services', requireAdmin, (req, res) => {
 });
 
 app.post('/admin/services/save', requireAdmin, (req, res) => {
-  const { id, icon, title, description } = req.body;
+  const { id, icon, title, description, image, image2 } = req.body;
   if (!title || !description) {
     flash(req, 'error', 'Service title and description are required.');
     return res.redirect('/admin/services');
@@ -528,8 +528,10 @@ app.post('/admin/services/save', requireAdmin, (req, res) => {
     s.icon = icon || s.icon;
     s.title = title;
     s.description = description;
+    if (image !== undefined) s.image = image || '';
+    if (image2 !== undefined) s.image2 = image2 || '';
   } else {
-    content.services.push({ id: newId(), icon: icon || '🏗️', title, description });
+    content.services.push({ id: newId(), icon: icon || '🏗️', title, description, image: image || '', image2: image2 || '' });
   }
   saveJSON(CONTENT_FILE, content);
   flash(req, 'success', 'Service saved.');

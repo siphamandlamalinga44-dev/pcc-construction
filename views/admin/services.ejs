@@ -1,19 +1,21 @@
 <%- include('_head', { title: title }) %>
 
 <h1>Services</h1>
-<p class="muted">Add, edit or delete the services shown on the Services page and home page.</p>
+<p class="muted">Add, edit or delete the services shown on the Services page and home page. Each service can have a photo (upload a file or paste an image URL).</p>
 
 <div class="admin-split">
   <div class="admin-list">
     <% services.forEach(function(s) { %>
       <div class="admin-row">
-        <div class="admin-row-icon"><%= s.icon %></div>
+        <div class="admin-thumb">
+          <% if (s.image) { %><img src="<%= s.image %>" alt=""><% } else { %><div class="thumb-placeholder"><span>?</span></div><% } %>
+        </div>
         <div class="admin-row-main">
-          <strong><%= s.title %></strong>
+          <strong><%= s.icon %> <%= s.title %></strong>
           <span class="muted small"><%= s.description %></span>
         </div>
-        <button class="btn btn-outline btn-sm" onclick="editService('<%= s.id %>', '<%= (s.icon||'').replace(/'/g, "\\'") %>', '<%= s.title.replace(/'/g, "\\'") %>', '<%= s.description.replace(/'/g, "\\'") %>')">Edit</button>
-        <form method="post" action="/admin/services/delete" style="display:inline" onsubmit="return confirm('Delete this service?')">
+        <button class="btn btn-outline btn-sm" onclick="editService('<%= s.id %>')">Edit</button>
+        <form method="post" action="/admin/services/delete" style="display:inline" onsubmit="return confirm('Delete this service?')\">
           <input type="hidden" name="id" value="<%= s.id %>">
           <button type="submit" class="btn btn-danger btn-sm">Delete</button>
         </form>
@@ -29,6 +31,18 @@
       <div class="field"><label>Icon (emoji or symbol)</label><input type="text" name="icon" id="service-icon" value="🏗️"></div>
       <div class="field"><label>Title</label><input type="text" name="title" id="service-title" required></div>
       <div class="field"><label>Description</label><textarea name="description" id="service-description" rows="4" required></textarea></div>
+      <div class="field">
+        <label>Main photo</label>
+        <input type="file" id="service-image-file" accept="image/*" class="file-to-dataurl" data-target="service-image">
+        <p class="muted small">Or paste an image URL:</p>
+        <input type="text" name="image" id="service-image" placeholder="/images/services/your-photo.jpg">
+      </div>
+      <div class="field">
+        <label>Second photo <span class="muted">(optional)</span></label>
+        <input type="file" id="service-image2-file" accept="image/*" class="file-to-dataurl" data-target="service-image2">
+        <p class="muted small">Or paste an image URL:</p>
+        <input type="text" name="image2" id="service-image2" placeholder="/images/services/your-photo-2.jpg">
+      </div>
       <button type="submit" class="btn btn-primary">Save Service</button>
       <button type="button" class="btn btn-outline" onclick="clearService()">Clear</button>
     </form>
@@ -36,11 +50,16 @@
 </div>
 
 <script>
-  function editService(id, icon, title, description) {
-    document.getElementById('service-id').value = id;
-    document.getElementById('service-icon').value = icon;
-    document.getElementById('service-title').value = title;
-    document.getElementById('service-description').value = description;
+  var servicesData = <%- JSON.stringify(services) %>;
+  function editService(id) {
+    var s = servicesData.find(function (x) { return x.id === id; });
+    if (!s) return;
+    document.getElementById('service-id').value = s.id;
+    document.getElementById('service-icon').value = s.icon || '';
+    document.getElementById('service-title').value = s.title;
+    document.getElementById('service-description').value = s.description;
+    document.getElementById('service-image').value = s.image || '';
+    document.getElementById('service-image2').value = s.image2 || '';
   }
   function clearService() {
     document.getElementById('service-form').reset();
