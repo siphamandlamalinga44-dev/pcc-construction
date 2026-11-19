@@ -17,7 +17,7 @@
       </div>
       <div class="info-card">
         <h3>Message us on WhatsApp</h3>
-        <% const wa = (content.site.whatsapp || '').replace(/[^\d]/g, ''); %>
+        <% const waDigits = (content.site.whatsapp || '').replace(/[^\d]/g, ''); const wa = waDigits.charAt(0) === '0' ? '27' + waDigits.slice(1) : waDigits; %>
         <% if (wa) { %>
           <p><a href="https://wa.me/<%= wa %>" target="_blank" rel="noopener"><%= content.site.whatsapp %></a></p>
         <% } else { %>
@@ -100,6 +100,16 @@
         </div>
         <button type="submit" class="btn btn-primary btn-lg">Send Enquiry</button>
       </form>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <span class="eyebrow">Quick intro</span>
+    <h2 class="section-heading">Watch this quick guide to reach us</h2>
+    <div class="welcome-video">
+      <%- include('partials/video', { video: '/videos/contact.mp4' }) %>
     </div>
   </div>
 </section>

@@ -57,7 +57,8 @@
     </div>
   </footer>
   <%
-    const wa = (content.site.whatsapp || '').replace(/[^\d]/g, '');
+    const waDigits = (content.site.whatsapp || '').replace(/[^\d]/g, '');
+    const wa = waDigits.charAt(0) === '0' ? '27' + waDigits.slice(1) : waDigits;
   %>
   <% if (wa) { %>
     <a class="wa-float" href="https://wa.me/<%= wa %>" target="_blank" rel="noopener" title="Chat with us on WhatsApp" aria-label="Chat with us on WhatsApp">

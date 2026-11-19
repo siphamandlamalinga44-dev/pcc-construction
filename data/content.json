@@ -2,11 +2,11 @@
   "site": {
     "companyName": "PC Chauke Construction and Projects CC",
     "tagline": "Building Your Vision, Built to Last",
-    "phone": "+27 11 000 0000",
-    "email": "info@pccconstruction.co.za",
+    "phone": "0617066839",
+    "email": "chaukephillip09@gmail.com",
     "address": "South Africa",
     "established": "2009",
-    "whatsapp": "+27 82 000 0000",
+    "whatsapp": "0797089314",
     "metaDescription": "PC Chauke Construction and Projects CC — trusted building services across South Africa."
   },
   "hero": {
@@ -153,7 +153,7 @@
       "date": "2024",
       "description": "A full office renovation delivered on schedule with modern finishes and updated infrastructure.",
       "image": "/images/projects/commercial-1.jpg",
-      "video": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "video": "/videos/commercial.mp4",
       "images": [
         "/images/projects/commercial-1.jpg",
         "/images/projects/commercial-2.jpg",
@@ -173,7 +173,8 @@
         "/images/projects/warehouse-2.jpg",
         "/images/projects/warehouse-3.jpg",
         "/images/projects/warehouse-4.jpg"
-      ]
+      ],
+      "video": "/videos/warehouse.mp4"
     },
     {
       "id": "56caa563-df8e-4877-ae58-6a2e049bb783",
@@ -187,7 +188,8 @@
         "/images/projects/residential-2.jpg",
         "/images/projects/residential-3.jpg",
         "/images/projects/residential-4.jpg"
-      ]
+      ],
+      "video": "/videos/residential.mp4"
     },
     {
       "id": "ec99e734-0065-4441-8df0-f00ce8be9da9",
@@ -200,7 +202,8 @@
         "/images/projects/infrastructure-1.jpg",
         "/images/projects/infrastructure-2.jpg",
         "/images/projects/infrastructure-3.jpg"
-      ]
+      ],
+      "video": "/videos/infrastructure.mp4"
     }
   ],
   "contact": {
@@ -214,7 +217,7 @@
       {
         "icon": "facebook",
         "label": "Facebook",
-        "url": "#"
+        "url": "https://facebook.com/PCconstruction"
       },
       {
         "icon": "instagram",
