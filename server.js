@@ -500,8 +500,22 @@ app.post('/admin/content', requireAdmin, (req, res) => {
   set(content.footer, 'copyright', c['footer.copyright']);
 
   const SOCIAL_KEYS = [['facebook', 'Facebook'], ['instagram', 'Instagram'], ['whatsapp', 'WhatsApp'], ['x', 'X (Twitter)'], ['linkedin', 'LinkedIn']];
+  // Normalize a WhatsApp value: accept a bare number (079 708 9314) or a full link.
+  function normalizeWhatsapp(v) {
+    if (!v) return '#';
+    const trimmed = v.trim();
+    if (/^https?:\/\//i.test(trimmed)) return trimmed;
+    const digits = trimmed.replace(/[^\d]/g, '');
+    if (digits) {
+      const num = digits.charAt(0) === '0' ? '27' + digits.slice(1) : digits;
+      return 'https://wa.me/' + num;
+    }
+    return '#';
+  }
   content.footer.socials = SOCIAL_KEYS.map(function (k) {
-    return { icon: k[0], label: k[1], url: c['social.' + k[0]] || '#' };
+    const raw = c['social.' + k[0]] || '#';
+    const url = k[0] === 'whatsapp' ? normalizeWhatsapp(raw) : (raw || '#');
+    return { icon: k[0], label: k[1], url: url };
   });
 
   set(content.footer, 'sarsTitle', c['footer.sarsTitle']);

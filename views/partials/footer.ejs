@@ -25,11 +25,18 @@
             x: { vb: '0 0 24 24', d: 'M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z' },
             linkedin: { vb: '0 0 16 16', d: 'M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.226 0-.672-.521-1.226-1.358-1.226-.837 0-1.359.554-1.359 1.226 0 .672.522 1.226 1.359 1.226zm0-1.742c-2.328 0-4.268 1.512-4.268 3.968 0 2.456 1.94 3.968 4.268 3.968 2.328 0 4.269-1.512 4.269-3.968 0-2.456-1.94-3.968-4.269-3.968z' }
           };
+          // WhatsApp: always clickable — build wa.me link from the site WhatsApp number
+          // when no dedicated social URL is set (or it's a placeholder).
+          const waDigits = (content.site.whatsapp || '').replace(/[^\d]/g, '');
+          const waNumber = waDigits.charAt(0) === '0' ? '27' + waDigits.slice(1) : waDigits;
+          const waLink = waNumber ? 'https://wa.me/' + waNumber : '';
           (content.footer.socials || []).forEach(function(s) {
             const icon = ICONS[s.icon];
             if (!icon) return;
-            if (s.url && s.url !== '#') { %>
-              <a class="social-link" href="<%= s.url %>" target="_blank" rel="noopener" title="<%= s.label %>" aria-label="<%= s.label %>">
+            let href = (s.url && s.url !== '#') ? s.url : '';
+            if (s.icon === 'whatsapp' && (!href || href === '#')) href = waLink;
+            if (href) { %>
+              <a class="social-link" href="<%= href %>" target="_blank" rel="noopener" title="<%= s.label %>" aria-label="<%= s.label %>">
                 <svg viewBox="<%= icon.vb %>" fill="currentColor" aria-hidden="true"><path d="<%= icon.d %>"></path></svg>
               </a>
             <% } else { %>
@@ -57,8 +64,7 @@
     </div>
   </footer>
   <%
-    const waDigits = (content.site.whatsapp || '').replace(/[^\d]/g, '');
-    const wa = waDigits.charAt(0) === '0' ? '27' + waDigits.slice(1) : waDigits;
+    const wa = waNumber;
   %>
   <% if (wa) { %>
     <a class="wa-float" href="https://wa.me/<%= wa %>" target="_blank" rel="noopener" title="Chat with us on WhatsApp" aria-label="Chat with us on WhatsApp">

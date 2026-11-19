@@ -81,13 +81,13 @@
 
   <fieldset class="admin-fieldset">
     <legend>Social media</legend>
-    <p class="muted small">Paste the full link for each account. Leaving it as # keeps the icon greyed out on the site.</p>
+    <p class="muted small">Paste the full link for each account. For WhatsApp you can enter just your number (e.g. 079 708 9314) — it is turned into a working wa.me link automatically. Leaving a field empty keeps that icon greyed out on the site.</p>
     <div class="field-row">
       <div class="field"><label>Facebook link</label><input type="text" name="social.facebook" value="<%= (content.footer.socials || []).find(function(s){return s.icon==='facebook'}) ? (content.footer.socials.find(function(s){return s.icon==='facebook'}).url || '') : '' %>"></div>
       <div class="field"><label>Instagram link</label><input type="text" name="social.instagram" value="<%= (content.footer.socials || []).find(function(s){return s.icon==='instagram'}) ? (content.footer.socials.find(function(s){return s.icon==='instagram'}).url || '') : '' %>"></div>
     </div>
     <div class="field-row">
-      <div class="field"><label>WhatsApp link</label><input type="text" name="social.whatsapp" value="<%= (content.footer.socials || []).find(function(s){return s.icon==='whatsapp'}) ? (content.footer.socials.find(function(s){return s.icon==='whatsapp'}).url || '') : '' %>"></div>
+      <div class="field"><label>WhatsApp number or link</label><input type="text" name="social.whatsapp" placeholder="079 708 9314 or https://wa.me/…" value="<%= (content.footer.socials || []).find(function(s){return s.icon==='whatsapp'}) ? (content.footer.socials.find(function(s){return s.icon==='whatsapp'}).url || '') : '' %>"></div>
       <div class="field"><label>X (Twitter) link</label><input type="text" name="social.x" value="<%= (content.footer.socials || []).find(function(s){return s.icon==='x'}) ? (content.footer.socials.find(function(s){return s.icon==='x'}).url || '') : '' %>"></div>
     </div>
     <div class="field"><label>LinkedIn link</label><input type="text" name="social.linkedin" value="<%= (content.footer.socials || []).find(function(s){return s.icon==='linkedin'}) ? (content.footer.socials.find(function(s){return s.icon==='linkedin'}).url || '') : '' %>"></div>
