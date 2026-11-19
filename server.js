@@ -182,8 +182,8 @@ function defaultContent() {
     },
     footer: {
       text:
-        'PCC – Philip Chauke Construction — trusted building, renovation and maintenance services across Gauteng.',
-      copyright: '© 2026 PCC – Philip Chauke Construction. All rights reserved.'
+        'PC Chauke Construction and Projects CC — trusted building, renovation and project services across South Africa.',
+      copyright: '© 2026 PC Chauke Construction and Projects CC. All rights reserved.'
     }
   };
 }
@@ -443,6 +443,14 @@ app.post('/admin/content', requireAdmin, (req, res) => {
 
   set(content.footer, 'text', c['footer.text']);
   set(content.footer, 'copyright', c['footer.copyright']);
+
+  const SOCIAL_KEYS = [['facebook', 'Facebook'], ['instagram', 'Instagram'], ['whatsapp', 'WhatsApp'], ['x', 'X (Twitter)'], ['linkedin', 'LinkedIn']];
+  content.footer.socials = SOCIAL_KEYS.map(function (k) {
+    return { icon: k[0], label: k[1], url: c['social.' + k[0]] || '#' };
+  });
+
+  set(content.footer, 'sarsTitle', c['footer.sarsTitle']);
+  set(content.footer, 'sarsSub', c['footer.sarsSub']);
 
   saveJSON(CONTENT_FILE, content);
   flash(req, 'success', 'Website text updated. Changes are live on the site.');

@@ -1,6 +1,6 @@
 {
   "site": {
-    "companyName": "PCC – Philip Chauke Construction",
+    "companyName": "PC Chauke Construction and Projects CC",
     "tagline": "Building Your Vision, Built to Last",
     "phone": "+27 11 000 0000",
     "email": "info@pccconstruction.co.za",
@@ -13,43 +13,43 @@
     "ctaText": "Get a Free Quote"
   },
   "home": {
-    "aboutPreview": "PCC – Philip Chauke Construction is a trusted building and renovation contractor, delivering quality workmanship across all provinces of South Africa — from small repairs to complete new builds.",
+    "aboutPreview": "PC Chauke Construction and Projects CC is a trusted building and renovation contractor, delivering quality workmanship across all provinces of South Africa — from small repairs to complete new builds.",
     "stats": [
       {
-        "value": "19+",
-        "label": "Years in Business"
+        "value": "",
+        "label": ""
       },
       {
-        "value": "320+",
-        "label": "Projects Delivered"
+        "value": "",
+        "label": ""
       },
       {
-        "value": "98%",
-        "label": "Client Satisfaction"
+        "value": "",
+        "label": ""
       },
       {
-        "value": "40+",
-        "label": "Expert Crew"
+        "value": "",
+        "label": ""
       }
     ],
     "whyChooseUs": [
       {
-        "title": "On-Time Delivery",
-        "text": "Tight scheduling and solid project management keep every build on track, every time."
+        "title": "",
+        "text": ""
       },
       {
-        "title": "Quality First",
-        "text": "We use premium materials and strict workmanship standards, so results last for decades."
+        "title": "",
+        "text": ""
       },
       {
-        "title": "Transparent Pricing",
-        "text": "Clear quotes with no hidden costs — you always know exactly where your money goes."
+        "title": "",
+        "text": ""
       }
     ]
   },
   "about": {
     "body": [
-      "PCC – Philip Chauke Construction is a building and renovation contractor serving clients in every province of South Africa. From new builds to renovations and repairs, we deliver quality workmanship on every project, big or small.",
+      "PC Chauke Construction and Projects CC is a building and renovation contractor serving clients in every province of South Africa. From new builds to renovations and repairs, we deliver quality workmanship on every project, big or small.",
       "We take on the full scope of a build — planning, structural work, finishes, and handover — so you have one accountable team from start to finish.",
       "With a focus on honest pricing, reliable timelines and work that lasts, we deliver results our clients can trust."
     ]
@@ -156,14 +156,43 @@
     "hours": "Office hours: Monday – Friday, 07:30 – 17:00"
   },
   "footer": {
-    "text": "PCC – Philip Chauke Construction — trusted building, renovation and maintenance services across South Africa.",
-    "copyright": "© 2026 PCC – Philip Chauke Construction. All rights reserved."
+    "text": "PC Chauke Construction and Projects CC — trusted building, renovation and project services across South Africa.",
+    "copyright": "© 2026 PC Chauke Construction and Projects CC. All rights reserved.",
+    "socials": [
+      {
+        "icon": "facebook",
+        "label": "Facebook",
+        "url": "#"
+      },
+      {
+        "icon": "instagram",
+        "label": "Instagram",
+        "url": "#"
+      },
+      {
+        "icon": "whatsapp",
+        "label": "WhatsApp",
+        "url": "#"
+      },
+      {
+        "icon": "x",
+        "label": "X (Twitter)",
+        "url": "#"
+      },
+      {
+        "icon": "linkedin",
+        "label": "LinkedIn",
+        "url": "#"
+      }
+    ],
+    "sarsTitle": "SARS Registered",
+    "sarsSub": "Tax-compliant business"
   },
   "videos": [
     {
       "id": "b7e2d94a-1c35-4f8a-9e6d-2a4f7c8b1d5e",
       "title": "Welcome to PCC",
-      "description": "A warm welcome from PCC — Philip Chauke Construction. A quick look at who we are, what we build and how we work, wherever you are in South Africa.",
+      "description": "A warm welcome from PC Chauke Construction and Projects CC. A quick look at who we are, what we build and how we work, wherever you are in South Africa.",
       "video": "/videos/welcome.mp4"
     },
     {

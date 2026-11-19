@@ -303,3 +303,39 @@ a { text-decoration: none; color: inherit; }
 @media (max-width: 900px) {
   .welcome-video { max-width: 100%; }
 }
+
+/* ============ Footer: socials + SARS badge ============ */
+.footer-trust {
+  display: flex; flex-wrap: wrap; gap: 20px;
+  justify-content: space-between; align-items: center;
+  padding-top: 20px; margin-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
+.footer-socials { display: flex; gap: 10px; flex-wrap: wrap; }
+.social-link {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  transition: background 0.2s, transform 0.2s;
+}
+.social-link svg { width: 19px; height: 19px; display: block; }
+a.social-link:hover { background: var(--primary, #c98a2d); transform: translateY(-2px); }
+.social-pending { opacity: 0.4; cursor: not-allowed; }
+
+.sars-badge {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 16px 8px 10px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+.sars-shield { width: 30px; height: 30px; color: #7fd1a1; flex: none; }
+.sars-text { display: flex; flex-direction: column; line-height: 1.25; }
+.sars-text strong { font-size: 0.95rem; color: #fff; }
+.sars-text span { font-size: 0.78rem; color: rgba(255, 255, 255, 0.7); }
+
+@media (max-width: 640px) {
+  .footer-trust { justify-content: center; }
+}
