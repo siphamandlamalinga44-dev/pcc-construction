@@ -1,18 +1,18 @@
 <%- include('_head', { title: title }) %>
 
 <h1>Projects</h1>
-<p class="muted">Manage your project portfolio. Add a project image and an optional video (YouTube, Vimeo or .mp4 link, or upload a small video file).</p>
+<p class="muted">Manage your project portfolio. Add project images (a gallery of photos) and an optional video (YouTube, Vimeo or .mp4 link, or upload a small video file).</p>
 
 <div class="admin-split">
   <div class="admin-list">
     <% projects.forEach(function(p) { %>
       <div class="admin-row">
         <div class="admin-thumb">
-          <% if (p.image) { %><img src="<%= p.image %>" alt=""><div class="thumb-placeholder" style="display:none"><span>?</span></div><% } else { %><div class="thumb-placeholder"><span><%= p.category %></span></div><% } %>
+          <% if (p.image) { %><img src="<%= p.image %>" alt=""><% } else { %><div class="thumb-placeholder"><span>?</span></div><% } %>
         </div>
         <div class="admin-row-main">
           <strong><%= p.title %></strong>
-          <span class="muted small"><%= p.category %> · <%= p.date %><% if (p.video) { %> · 🎬 has video<% } %> — <%= p.description %></span>
+          <span class="muted small"><%= p.category %> · <%= p.date %><% if (p.video) { %> · 🎬 has video<% } %><% if (p.images && p.images.length > 1) { %> · 🖼 <%= p.images.length %> photos<% } %> — <%= p.description %></span>
         </div>
         <button class="btn btn-outline btn-sm" onclick="editProject('<%= p.id %>')">Edit</button>
         <form method="post" action="/admin/projects/delete" style="display:inline" onsubmit="return confirm('Delete this project?')">
@@ -34,12 +34,21 @@
         <div class="field"><label>Year</label><input type="text" name="date" id="project-date"></div>
       </div>
       <div class="field"><label>Description</label><textarea name="description" id="project-description" rows="4" required></textarea></div>
+
       <div class="field">
-        <label>Project image</label>
+        <label>Main image</label>
         <input type="file" id="project-image-file" accept="image/*" class="file-to-dataurl" data-target="project-image">
         <p class="muted small">Or paste an image URL:</p>
-        <input type="text" name="image" id="project-image" placeholder="https://...">
+        <input type="text" name="image" id="project-image" placeholder="https://... or /images/projects/your-photo.jpg">
       </div>
+
+      <div class="field">
+        <label>Gallery photos <span class="muted">(one URL per line; the first line is the main image)</span></label>
+        <textarea name="images" id="project-images" rows="5" placeholder="/images/projects/photo-1.jpg&#10;/images/projects/photo-2.jpg"></textarea>
+        <input type="file" id="project-gallery-file" accept="image/*" multiple>
+        <p class="muted small">Or choose one or more image files to append to the gallery.</p>
+      </div>
+
       <div class="field">
         <label>Project video <span class="muted">(optional)</span></label>
         <input type="file" id="project-video-file" accept="video/*" class="file-to-dataurl" data-target="project-video">
@@ -64,12 +73,43 @@
     document.getElementById('project-date').value = p.date;
     document.getElementById('project-description').value = p.description;
     document.getElementById('project-image').value = p.image || '';
+    document.getElementById('project-images').value = (p.images || []).join('\n');
     document.getElementById('project-video').value = p.video || '';
   }
   function clearProject() {
     document.getElementById('project-form').reset();
     document.getElementById('project-id').value = '';
   }
+  // Append chosen files to the gallery textarea as data URLs
+  (function () {
+    var input = document.getElementById('project-gallery-file');
+    if (!input) return;
+    input.addEventListener('change', function () {
+      var textarea = document.getElementById('project-images');
+      var files = Array.prototype.slice.call(input.files || []);
+      if (!files.length) return;
+      var added = 0;
+      var readers = files.map(function (file) {
+        return new Promise(function (resolve) {
+          var reader = new FileReader();
+          reader.onload = function () {
+            var line = reader.result;
+            if (file.size > 4 * 1024 * 1024) {
+              alert(file.name + ' is larger than 4 MB. Choose smaller images or use URLs.');
+              resolve(false);
+              return;
+            }
+            textarea.value += (textarea.value ? '\n' : '') + line;
+            resolve(true);
+          };
+          reader.readAsDataURL(file);
+        });
+      });
+      Promise.all(readers).then(function () {
+        textarea.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+    });
+  })();
 </script>
 
 <%- include('_foot') %>

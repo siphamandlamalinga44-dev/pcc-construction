@@ -551,11 +551,15 @@ app.get('/admin/projects', requireAdmin, (req, res) => {
 });
 
 app.post('/admin/projects/save', requireAdmin, (req, res) => {
-  const { id, title, category, date, description, image, video } = req.body;
+  const { id, title, category, date, description, image, video, images } = req.body;
   if (!title || !description) {
     flash(req, 'error', 'Project title and description are required.');
     return res.redirect('/admin/projects');
   }
+  const gallery = (images || '')
+    .split('\n')
+    .map((s) => s.trim())
+    .filter(Boolean);
   if (id && content.projects.some((p) => p.id === id)) {
     const p = content.projects.find((p) => p.id === id);
     p.title = title;
@@ -563,6 +567,7 @@ app.post('/admin/projects/save', requireAdmin, (req, res) => {
     p.date = date || p.date;
     p.description = description;
     if (image) p.image = image;
+    if (gallery.length) { p.images = gallery; p.image = gallery[0]; }
     if (video) p.video = video;
   } else {
     content.projects.push({
@@ -571,7 +576,8 @@ app.post('/admin/projects/save', requireAdmin, (req, res) => {
       category: category || 'General',
       date: date || new Date().getFullYear().toString(),
       description,
-      image: image || '',
+      image: image || (gallery.length ? gallery[0] : ''),
+      images: gallery,
       video: video || ''
     });
   }

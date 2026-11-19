@@ -86,34 +86,39 @@
       "icon": "📋",
       "title": "Fisca Boards",
       "description": "Installation and fitting of Fisca (fibre-cement) boards for walls, ceilings and roofing.",
-      "image": "/images/services/fisca-boards-1.jpg"
+      "image": "/images/services/fisca-boards-1.jpg",
+      "image2": "/images/services/fisca-boards-2.jpg"
     },
     {
       "id": "a7fe9dcc-81f0-4ca0-8d6e-8fd7c3e94f63",
       "icon": "⚡",
       "title": "Electrical",
       "description": "Complete electrical installations, repairs and maintenance for homes and businesses.",
-      "image": "/images/services/electrical-1.jpg"
+      "image": "/images/services/electrical-1.jpg",
+      "image2": "/images/services/electrical-2.jpg"
     },
     {
       "id": "40a45208-324a-49f3-b214-7e3ae6822ff6",
       "icon": "🚰",
       "title": "Plumbing",
       "description": "Plumbing installations, repairs and maintenance — from leaks and taps to full bathroom plumbing.",
-      "image": "/images/services/plumbing-1.jpg"
+      "image": "/images/services/plumbing-1.jpg",
+      "image2": "/images/services/plumbing-2.jpg"
     },
     {
       "id": "3405d318-1ffe-40c2-aefb-39572be3e4a4",
       "icon": "🔌",
       "title": "House Wiring",
       "description": "Professional house wiring and rewiring for new builds, renovations and older properties.",
-      "image": "/images/services/house-wiring-1.jpg"
+      "image": "/images/services/house-wiring-1.jpg",
+      "image2": "/images/services/house-wiring-2.jpg"
     },
     {
       "id": "b9ccc7f9-e7cd-4327-92a5-dea1a7ad56ef",
       "icon": "📐",
       "title": "House Plans",
-      "description": "Drafting and design of house plans, extensions and alteration drawings for your project."
+      "description": "Drafting and design of house plans, extensions and alteration drawings for your project.",
+      "image": "/images/services/house-plans-1.jpg"
     },
     {
       "id": "8f7b96d4-0b6d-4aa4-8919-2a173f357d7c",
@@ -147,8 +152,14 @@
       "category": "Commercial",
       "date": "2024",
       "description": "A full office renovation delivered on schedule with modern finishes and updated infrastructure.",
-      "image": "",
-      "video": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+      "image": "/images/projects/commercial-1.jpg",
+      "video": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "images": [
+        "/images/projects/commercial-1.jpg",
+        "/images/projects/commercial-2.jpg",
+        "/images/projects/commercial-3.jpg",
+        "/images/projects/commercial-4.jpg"
+      ]
     },
     {
       "id": "8def87a7-150c-426e-b56b-2a500ca87d4e",
@@ -156,7 +167,13 @@
       "category": "Industrial",
       "date": "2023",
       "description": "A large-scale warehouse build with heavy-duty flooring and loading areas.",
-      "image": ""
+      "image": "/images/projects/warehouse-1.jpg",
+      "images": [
+        "/images/projects/warehouse-1.jpg",
+        "/images/projects/warehouse-2.jpg",
+        "/images/projects/warehouse-3.jpg",
+        "/images/projects/warehouse-4.jpg"
+      ]
     },
     {
       "id": "56caa563-df8e-4877-ae58-6a2e049bb783",
@@ -164,7 +181,13 @@
       "category": "Residential",
       "date": "2023",
       "description": "A complete house build from foundation to handover, finished to a high standard.",
-      "image": ""
+      "image": "/images/projects/residential-1.jpg",
+      "images": [
+        "/images/projects/residential-1.jpg",
+        "/images/projects/residential-2.jpg",
+        "/images/projects/residential-3.jpg",
+        "/images/projects/residential-4.jpg"
+      ]
     },
     {
       "id": "ec99e734-0065-4441-8df0-f00ce8be9da9",
@@ -172,7 +195,12 @@
       "category": "Infrastructure",
       "date": "2022",
       "description": "Road resurfacing and stormwater drainage works for a major corridor.",
-      "image": ""
+      "image": "/images/projects/infrastructure-1.jpg",
+      "images": [
+        "/images/projects/infrastructure-1.jpg",
+        "/images/projects/infrastructure-2.jpg",
+        "/images/projects/infrastructure-3.jpg"
+      ]
     }
   ],
   "contact": {
