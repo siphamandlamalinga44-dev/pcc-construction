@@ -24,7 +24,7 @@
         <article class="gallery-card" data-cat="<%= p.category || '' %>">
           <div class="gallery-media">
             <% if (imgs.length) { %>
-              <img src="<%= imgs[0] %>" alt="<%= p.title %>" class="gallery-img" onclick="openLightbox(<%- JSON.stringify(imgs) %>, '<%= p.title %>')">
+              <div class="gallery-img-wrap"><img src="<%= imgs[0] %>" alt="<%= p.title %>" class="gallery-img" onclick="openLightbox(<%- JSON.stringify(imgs).replace(/"/g, "'") %>, '<%= p.title %>')"></div>
             <% } else { %>
               <div class="thumb-placeholder gallery-img"><span><%= p.category %></span></div>
             <% } %>
@@ -66,8 +66,6 @@
     <button class="lightbox-nav lightbox-next" onclick="lbStep(1)" aria-label="Next">›</button>
   <% } %>
 </div>
-
-<%- include('partials/footer') %>
 
 <script>
   var lbImages = [];
@@ -116,3 +114,5 @@
     });
   });
 </script>
+
+<%- include('partials/footer') %>
